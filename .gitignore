@@ -4,4 +4,4 @@
 .project
 .pydevproject
 env/
-
+*.db
