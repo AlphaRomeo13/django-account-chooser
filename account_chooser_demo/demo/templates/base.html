@@ -5,7 +5,8 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <title>{% block title %}{% endblock %}</title>
-        {% block account_chooser %}{% endblock %}
+        <script type="text/javascript" src="https://www.accountchooser.com/ac.js" ></script>
+        <script type="text/javascript" src="{{STATIC_URL}}js/djac-config.js" ></script>
     </head>
     <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
         <div id="body">

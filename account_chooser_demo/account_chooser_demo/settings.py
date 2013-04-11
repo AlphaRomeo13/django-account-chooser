@@ -120,9 +120,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+
     'registration',  # provide signup, login views for demo
     'django_extensions',
     'debug_toolbar',
+    'south',
+
     'account_chooser',
     'demo',
 )
@@ -169,4 +172,18 @@ DEBUG_TOOLBAR_PANELS = (
     'debug_toolbar.panels.logger.LoggingPanel',
 )
 
-ACCOUNT_CHOOSER_SETTINGS = {'signupUrl': '/accounts/register/', }
+ACCOUNT_CHOOSER_SETTINGS = {
+                        'signupUrl': '/accounts/register/',
+                        'siteEmailId': 'id_email',
+                        'sitePasswordId': 'id_password',
+                        'siteDisplayNameId': 'id_username',
+                        'sitePhotoUrlId': '',
+                        'providers': ["facebook.com", "twitter.com"],
+}
+
+ACCOUNT_ACTIVATION_DAYS = 7
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    # TODO: configure SMTB server
+    pass
