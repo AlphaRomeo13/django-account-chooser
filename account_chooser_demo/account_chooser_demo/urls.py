@@ -9,5 +9,5 @@ urlpatterns = patterns('',
     url(r'^accounts/', include('registration.urls')),
     url(r'^facebook/', include('django_facebook.urls')),
     url(r'^accounts/', include('account_chooser.urls')),
-    url(r'', include('demo.urls')),
+    url(r'^demo/', include('demo.urls')),
 )
