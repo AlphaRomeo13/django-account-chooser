@@ -172,6 +172,7 @@ DEBUG_TOOLBAR_PANELS = (
 
 ACCOUNT_CHOOSER_SETTINGS = {'signupUrl': '/accounts/register/', }
 
+#facebook settings
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django_facebook.context_processors.facebook',
     'django.contrib.auth.context_processors.auth',
@@ -190,3 +191,11 @@ AUTH_PROFILE_MODULE = 'demo.Profile'
 
 FACEBOOK_APP_ID = "422724461106816"
 FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
+
+
+#twitter settings
+CONSTUMER_KEY = "v8wsuWmpbmoKX7IPfEr49A"
+CONSTUMER_SECRET = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
+ACCESS_TOKEN = '200993161-IRwQvdUwg7KTWrsmzPFm5uP9CY81nreLTpMjzaa2'
+ACCESS_SECRET = 'dpqNIZHGC5Kxqsgz2CuUO3keAMUS3ZyeLWnsITHjk'
+# remember to confiure the call_back URL in you twitter app. setting page
