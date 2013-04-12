@@ -120,9 +120,12 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.admindocs',
+
     'registration',  # provide signup, login views for demo
     'django_extensions',
     'debug_toolbar',
+    'south',
+
     'account_chooser',
     'demo',
     'django_facebook',
@@ -199,3 +202,20 @@ CONSTUMER_SECRET = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
 ACCESS_TOKEN = '200993161-IRwQvdUwg7KTWrsmzPFm5uP9CY81nreLTpMjzaa2'
 ACCESS_SECRET = 'dpqNIZHGC5Kxqsgz2CuUO3keAMUS3ZyeLWnsITHjk'
 # remember to confiure the call_back URL in you twitter app. setting page
+
+
+ACCOUNT_CHOOSER_SETTINGS = {
+                        'signupUrl': '/accounts/register/',
+                        'siteEmailId': 'id_email',
+                        'sitePasswordId': 'id_password',
+                        'siteDisplayNameId': 'id_username',
+                        'sitePhotoUrlId': '',
+                        'providers': ["facebook.com", "twitter.com"],
+}
+
+ACCOUNT_ACTIVATION_DAYS = 7
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    # TODO: configure SMTB server
+    pass
