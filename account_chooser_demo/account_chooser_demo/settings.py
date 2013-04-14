@@ -1,6 +1,17 @@
 # Django settings for account_chooser_demo project.
+import django.conf.global_settings as DEFAULT_SETTINGS
+import os
+import sys
 
-DEBUG = True
+# hack to allow importing account_chooser
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                     os.path.pardir + '/' + os.path.pardir)))
+
+DEBUG = False
+
+if os.getenv('RUN_ENV') == 'development':
+    DEBUG = True
+
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -9,16 +20,28 @@ ADMINS = (
 
 MANAGERS = ADMINS
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'account_chooser.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+if DEBUG:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'account_chooser.db',
+            'USER': '',
+            'PASSWORD': '',
+            'HOST': '',
+            'PORT': '',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dfdma6i9i1pm3i',
+            'HOST': 'ec2-23-21-203-9.compute-1.amazonaws.com',
+            'PORT': 5432,
+            'USER': 'waalzkeqfqkqqr',
+            'PASSWORD': 'dgx2KCQw7HYsglBD2JOqwxH1Iv'
+        }
+    }
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -48,18 +71,18 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = ''
+MEDIA_ROOT = 'media/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = '/static/'
+STATIC_ROOT = 'static/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -175,34 +198,17 @@ DEBUG_TOOLBAR_PANELS = (
 
 ACCOUNT_CHOOSER_SETTINGS = {'signupUrl': '/accounts/register/', }
 
-#facebook settings
-TEMPLATE_CONTEXT_PROCESSORS = (
+# facebook settings
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django_facebook.context_processors.facebook',
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.tz',
-    'django.contrib.messages.context_processors.messages',
 )
+
 AUTHENTICATION_BACKENDS = (
     'django_facebook.auth_backends.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-AUTH_PROFILE_MODULE = 'demo.Profile'
 
-FACEBOOK_APP_ID = "422724461106816"
-FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
-
-
-#twitter settings
-CONSTUMER_KEY = "v8wsuWmpbmoKX7IPfEr49A"
-CONSTUMER_SECRET = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
-ACCESS_TOKEN = '200993161-IRwQvdUwg7KTWrsmzPFm5uP9CY81nreLTpMjzaa2'
-ACCESS_SECRET = 'dpqNIZHGC5Kxqsgz2CuUO3keAMUS3ZyeLWnsITHjk'
-# remember to confiure the call_back URL in you twitter app. setting page
-
+AUTH_PROFILE_MODULE = 'registration.registrationprofile'
 
 ACCOUNT_CHOOSER_SETTINGS = {
                         'signupUrl': '/accounts/register/',
@@ -217,5 +223,17 @@ ACCOUNT_ACTIVATION_DAYS = 7
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 else:
+    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
     # TODO: configure SMTB server
     pass
+
+FACEBOOK_APP_ID = "422724461106816"
+FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
+
+
+# twitter settings
+CONSTUMER_KEY = "v8wsuWmpbmoKX7IPfEr49A"
+CONSTUMER_SECRET = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
+ACCESS_TOKEN = '200993161-IRwQvdUwg7KTWrsmzPFm5uP9CY81nreLTpMjzaa2'
+ACCESS_SECRET = 'dpqNIZHGC5Kxqsgz2CuUO3keAMUS3ZyeLWnsITHjk'
+# remember to confiure the call_back URL in you twitter app. setting page

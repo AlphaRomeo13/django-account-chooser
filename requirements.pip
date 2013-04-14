@@ -4,4 +4,8 @@ django-extensions
 django-debug-toolbar
 django_facebook
 south
+Pillow
+coveralls
 tweepy
+psycopg2==2.4.6
+gunicorn==0.17.2

@@ -22,6 +22,7 @@ class UserStatus (View):
          In this case ac.js will dispatch to that URI,
          and the subsequent login path depends on how that provider works.
     '''
+
     def post(self, request, *args, **kwargs):
         response_data = []
         return HttpResponse(json.dumps(response_data),
