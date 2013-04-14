@@ -16,12 +16,12 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': 'account_chooser.db',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
-        'PORT': '',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dfdma6i9i1pm3i',
+        'HOST': 'ec2-23-21-203-9.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'waalzkeqfqkqqr',
+        'PASSWORD': 'dgx2KCQw7HYsglBD2JOqwxH1Iv'
     }
 }
 
@@ -105,7 +105,7 @@ MIDDLEWARE_CLASSES = (
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'account_chooser_demo.urls'
+ROOT_URLCONF = 'account_chooser_demo.account_chooser_demo.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
 WSGI_APPLICATION = 'account_chooser_demo.wsgi.application'
@@ -202,7 +202,8 @@ ACCOUNT_CHOOSER_SETTINGS = {
 }
 
 ACCOUNT_ACTIVATION_DAYS = 7
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+# TODO: configure SMTB server
 
 FACEBOOK_APP_ID = "422724461106816"
 FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
