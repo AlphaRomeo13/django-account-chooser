@@ -12,7 +12,7 @@ if __name__ == "__main__":
                               "account_chooser_demo.settings")
     else:
         os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                  "account_chooser_demo.account_chooser_demo.heroku_settings")
+                              "account_chooser_demo.heroku_settings")
 
     from django.core.management import execute_from_command_line
 
