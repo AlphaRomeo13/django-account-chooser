@@ -8,3 +8,4 @@ env/
 .settings/
 .coverage
 account_chooser_demo/static
+static/

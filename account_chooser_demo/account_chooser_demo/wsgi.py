@@ -20,7 +20,6 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
                                      os.path.pardir)))
 
-open('/home/myaser/txt', 'w').write('\n'.join(sys.path))
 os.environ.setdefault("DJANGO_SETTINGS_MODULE",
                   "account_chooser_demo.account_chooser_demo.heroku_settings")
 # This application object is used by any WSGI server configured to use this
