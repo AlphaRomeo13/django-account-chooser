@@ -1,10 +1,11 @@
 # Create your views here.
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedirect
-from django.utils import simplejson as json
+from django.http import HttpResponseRedirect
+# from django.utils import simplejson as json
 from django.conf import settings
 import tweepy
+
 
 def index(request):
 	return render(request,"demo/index.html")
@@ -44,6 +45,16 @@ def finish_auth(request):
 	#     auth.get_access_token(verifier)
 	# except tweepy.TweepError:
 	#     print 'Error! Failed to get access token.'
+
+
+def gplus_auth(request):
+	consumer_key = settings.CONSTUMER_KEY
+	consumer_secret = settings.CONSTUMER_SECRET
+	auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+	auth_url = auth.get_authorization_url()
+	return HttpResponseRedirect(auth_url)
+
+
 
 def yah(request):
 	return render(request,'demo/yah.html')
