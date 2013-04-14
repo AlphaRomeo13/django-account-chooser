@@ -1,4 +1,5 @@
 # Django settings for account_chooser_demo project.
+import django.conf.global_settings as DEFAULT_SETTINGS
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -12,11 +13,11 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'account_chooser.db',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'NAME': 'account_chooser.db',  # Or path to database file if using sqlite3.
+        'USER': '',  # Not used with sqlite3.
+        'PASSWORD': '',  # Not used with sqlite3.
+        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
     }
 }
 
@@ -97,7 +98,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.climport django.conf.global_settings as DEFAULT_SETTINGSickjacking.XFrameOptionsMiddleware',
 )
 
 ROOT_URLCONF = 'account_chooser_demo.urls'
@@ -175,28 +176,23 @@ DEBUG_TOOLBAR_PANELS = (
 
 ACCOUNT_CHOOSER_SETTINGS = {'signupUrl': '/accounts/register/', }
 
-#facebook settings
-TEMPLATE_CONTEXT_PROCESSORS = (
+# facebook settings
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
     'django_facebook.context_processors.facebook',
-    'django.contrib.auth.context_processors.auth',
-    'django.core.context_processors.debug',
-    'django.core.context_processors.i18n',
-    'django.core.context_processors.media',
-    'django.core.context_processors.static',
-    'django.core.context_processors.tz',
-    'django.contrib.messages.context_processors.messages',
 )
+
 AUTHENTICATION_BACKENDS = (
     'django_facebook.auth_backends.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-AUTH_PROFILE_MODULE = 'demo.Profile'
+
+AUTH_PROFILE_MODULE = 'registration.registrationprofile'
 
 FACEBOOK_APP_ID = "422724461106816"
 FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
 
 
-#twitter settings
+# twitter settings
 CONSTUMER_KEY = "v8wsuWmpbmoKX7IPfEr49A"
 CONSTUMER_SECRET = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
 ACCESS_TOKEN = '200993161-IRwQvdUwg7KTWrsmzPFm5uP9CY81nreLTpMjzaa2'

@@ -4,3 +4,6 @@ django-extensions
 django-debug-toolbar
 django_facebook
 south
+Pillow
+coveralls
+tweepy
