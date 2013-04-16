@@ -9,4 +9,12 @@ def create_facebook_profile(sender, instance, created, **kwargs):
     if created:
         RegistrationProfile.objects.create(user=instance)
 
-post_save.connect(create_facebook_profile, sender=User)
+# def save(self, *args, **kwargs):
+#     try:
+#         existing = UserExtension.objects.get(user=self.user)
+#         self.id = existing.id #force update instead of insert
+#     except UserExtension.DoesNotExist:
+#         pass 
+#     models.Model.save(self, *args, **kwargs)
+
+# post_save.connect(create_facebook_profile, sender=User)

@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 class UserStatus (View):
@@ -28,7 +29,16 @@ class UserStatus (View):
     '''
     @method_decorator(csrf_exempt)
     def post(self, request, *args, **kwargs):
-        response_data = []
+        if request.method == "POST" :
+            user =User.objects.filter(username = request.POST['displayName']) or User.objects.filter(email= request.POST['email'])
+            # if len(user.filter(profile__pi_url != null)) != 0:
+            #     response_data = {"ip_uri" : user.profile.ip_uri}
+            if user:
+                response_data = {"register": True}
+            else:
+                response_data = {"register": False}
+        else:
+            response_data = {"register": False}
         return HttpResponse(json.dumps(response_data),
                             mimetype="application/json")
 

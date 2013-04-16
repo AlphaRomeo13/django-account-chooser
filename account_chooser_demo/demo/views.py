@@ -18,6 +18,9 @@ def facebook_signup(request):
 def twitter_signup(request):    
     return render(request, "demo/twitter_signup.html")
 
+def profile(request):
+	return render(request,'demo/yah.html')
+
 
 def twitter_auth(request):
     consumer_key = settings.CONSTUMER_KEY
