@@ -7,6 +7,6 @@ urlpatterns = patterns('account_chooser.views',
               url(r'^user_status/$', UserStatus.as_view(),
                     name='account_chooser_get_user_status'),
                 url(r'store_account', StoreAccount.as_view(),
-                    name='account_chooser_store_account')
+                    name='account_chooser_store_account'),
                 url(r'profile/$', profile),
                         )

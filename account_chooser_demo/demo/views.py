@@ -19,7 +19,7 @@ def twitter_signup(request):
     return render(request, "demo/twitter_signup.html")
 
 def profile(request):
-	return render(request,'demo/yah.html')
+	return render(request, 'demo/yah.html')
 
 
 def twitter_auth(request):

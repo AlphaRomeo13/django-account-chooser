@@ -2,7 +2,7 @@ accountchooser.CONFIG={
     sitePasswordId: "{{sitePasswordId}}",
     language: "{{language}}",
     signupUrl: "{{signupUrl}}",
-    providers: "{{providers|safe}}",
+    providers: {{providers|safe}},
     homeUrl: "{{homeUrl}}",
     uiConfig: "{{uiConfig}}",
     siteDisplayNameId: "{{siteDisplayNameId}}",
