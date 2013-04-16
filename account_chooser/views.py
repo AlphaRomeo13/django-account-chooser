@@ -2,6 +2,9 @@
 from django.views.generic.base import View
 from django.http import HttpResponse
 from django.utils import simplejson as json
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.models import User
+
 
 
 class UserStatus (View):
@@ -22,8 +25,18 @@ class UserStatus (View):
          In this case ac.js will dispatch to that URI,
          and the subsequent login path depends on how that provider works.
     '''
-
+    
+    @csrf_exempt
     def post(self, request, *args, **kwargs):
-        response_data = []
+        if request.method == "POST" :
+            user =User.objects.filter(username = request.POST['displayName']) or User.objects.filter(email= request.POST['email'])
+            # if len(user.filter(profile__pi_url != null)) != 0:
+            #     response_data = {"ip_uri" : user.profile.ip_uri}
+            if user:
+                response_data = {"register": True}
+            else:
+                response_data = {"register": False}
+        else:
+            response_data = {"register": False}
         return HttpResponse(json.dumps(response_data),
                             mimetype="application/json")

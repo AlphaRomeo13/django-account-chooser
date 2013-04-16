@@ -5,6 +5,8 @@
         <title>{% block title %}{% endblock %}</title>
         <script type="text/javascript" src="https://www.accountchooser.com/ac.js" ></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/djac-config.js" ></script>
+    
+        {% block bottomheader %}{% endblock %}
     </head>
     <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
         <div id="body">

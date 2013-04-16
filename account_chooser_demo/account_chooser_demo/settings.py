@@ -104,7 +104,9 @@ MIDDLEWARE_CLASSES = (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
-
+DEBUG_TOOLBAR_CONFIG = {
+    'TAG': 'html',
+}
 ROOT_URLCONF = 'account_chooser_demo.urls'
 
 # Python dotted path to the WSGI application used by Django's runserver.
