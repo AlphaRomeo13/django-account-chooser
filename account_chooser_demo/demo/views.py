@@ -1,8 +1,8 @@
 # Create your views here.
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
-from django.http import HttpResponse, HttpResponseRedirect
-from django.utils import simplejson as json
+from django.http import HttpResponseRedirect
+# from django.utils import simplejson as json
 from django.conf import settings
 import tweepy
 
@@ -27,15 +27,15 @@ def twitter_auth(request):
     return HttpResponseRedirect(auth_url)
 
 
-def finish_auth(request):
-    consumer_key = "v8wsuWmpbmoKX7IPfEr49A"
-    consumer_secret = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
-    access_token = settings.ACCESS_TOKEN
-    access_secret = settings.ACCESS_SECRET
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_url)
-    token = request.session.get('request_token')
-    session.delete('request_token')
-    auth.set_request_token(token[0], token[1])
+# def finish_auth(request):
+#     consumer_key = "v8wsuWmpbmoKX7IPfEr49A"
+#     consumer_secret = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
+#     access_token = settings.ACCESS_TOKEN
+#     access_secret = settings.ACCESS_SECRET
+#     auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_url)
+#     token = request.session.get('request_token')
+#     session.delete('request_token')
+# 	user = auth.set_request_token(token[0], token[1])
 
 
 # auth.set_access_token(access_token,access_secret)
@@ -51,8 +51,7 @@ def finish_auth(request):
 #     print 'Error! Failed to get access token.'
 
 
-def yah(request):
-    return render(request, 'demo/yah.html')
+
 
 
 class Index (TemplateView):
