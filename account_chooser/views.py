@@ -2,6 +2,10 @@
 from django.views.generic.base import View
 from django.http import HttpResponse
 from django.utils import simplejson as json
+from django.shortcuts import render
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
 
 class UserStatus (View):
@@ -22,8 +26,24 @@ class UserStatus (View):
          In this case ac.js will dispatch to that URI,
          and the subsequent login path depends on how that provider works.
     '''
-
+    @method_decorator(csrf_exempt)
     def post(self, request, *args, **kwargs):
         response_data = []
         return HttpResponse(json.dumps(response_data),
                             mimetype="application/json")
+
+
+class StoreAccount (View):
+    '''
+    invokes ac.js and uses the storeAccount feature instructing it to
+    store the account info. If the login info was provided via AccountChooser,
+    this is a fast, efficient no-op.
+    '''
+    @method_decorator(login_required)
+    def get(self, request, *args, **kwargs):
+        from account_chooser.settings import ACCOUNT_CHOOSER_SETTINGS
+        redirect_to = request.REQUEST.get('next',
+                                          ACCOUNT_CHOOSER_SETTINGS['homeUrl'])
+        return render(request, 'account_chooser/store_account.html',
+                              {'user': request.user,
+                               'next': redirect_to})

@@ -5,6 +5,7 @@
         <title>{% block title %}{% endblock %}</title>
         <script type="text/javascript" src="https://www.accountchooser.com/ac.js" ></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/djac-config.js" ></script>
+        {% block head %}{% endblock %}
     </head>
     <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
         <div id="body">
@@ -17,7 +18,7 @@
             </div>
             {% endblock %}
         </div>
-                <script type="text/javascript">
+        <script type="text/javascript">
           (function() {
            var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
            po.src = 'https://apis.google.com/js/client:plusone.js';
