@@ -9,3 +9,4 @@ env/
 .coverage
 account_chooser_demo/static
 static/
+*.orig

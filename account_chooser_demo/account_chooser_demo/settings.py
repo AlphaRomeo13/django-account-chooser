@@ -102,6 +102,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'account_chooser.middleware.AccountChooserMiddleware',
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 DEBUG_TOOLBAR_CONFIG = {
@@ -193,6 +194,8 @@ AUTHENTICATION_BACKENDS = (
 )
 
 AUTH_PROFILE_MODULE = 'registration.registrationprofile'
+#TODO: configure LOGIN_REDIRECT_URL
+LOGIN_REDIRECT_URL = '/demo/facebook/'
 
 ACCOUNT_CHOOSER_SETTINGS = {
                         'signupUrl': '/accounts/register/',

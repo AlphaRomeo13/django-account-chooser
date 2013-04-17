@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block head %}
+<script type="text/javascript">
+    accountchooser.CONFIG.homeUrl = "{{next}}";
+    accountchooser.CONFIG.storeAccount = {
+    email: "{{user.email}}",
+    displayName: "{{user.username}}",
+    photoUrl: "{{user.photo}}",
+    providerId: "{{user.provider_Id}}" };
+</script>
+{% endblock %}

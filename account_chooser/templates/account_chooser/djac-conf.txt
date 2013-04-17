@@ -1,11 +1,13 @@
-accountchooser.CONFIG.sitePasswordId = "{{sitePasswordId}}";
-accountchooser.CONFIG.language = "{{language}}";
-accountchooser.CONFIG.signupUrl = "{{signupUrl}}";
-accountchooser.CONFIG.providers = "{{providers|safe}}";
-accountchooser.CONFIG.homeUrl = "{{homeUrl}}";
-accountchooser.CONFIG.uiConfig = "{{uiConfig}}";
-accountchooser.CONFIG.siteDisplayNameId = "{{siteDisplayNameId}}";
-accountchooser.CONFIG.sitePhotoUrlId = "{{sitePhotoUrlId}}";
-accountchooser.CONFIG.userStatusUrl = "{{userStatusUrl}}";
-accountchooser.CONFIG.loginUrl = "{{loginUrl}}";
-accountchooser.CONFIG.siteEmailId = "{{siteEmailId}}";
+accountchooser.CONFIG={ 
+    sitePasswordId: "{{sitePasswordId}}",
+    language: "{{language}}",
+    signupUrl: "{{signupUrl}}",
+    providers: {{providers|safe}},
+    homeUrl: "{{homeUrl}}",
+    uiConfig: "{{uiConfig}}",
+    siteDisplayNameId: "{{siteDisplayNameId}}",
+    sitePhotoUrlId: "{{sitePhotoUrlId}}",
+    userStatusUrl: "{{userStatusUrl}}",
+    loginUrl: "{{loginUrl}}",
+    siteEmailId: "{{siteEmailId}}",
+}
