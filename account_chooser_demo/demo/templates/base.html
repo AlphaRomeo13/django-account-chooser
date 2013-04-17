@@ -6,6 +6,7 @@
         <script type="text/javascript" src="https://www.accountchooser.com/ac.js" ></script>
         <script type="text/javascript" src="{{STATIC_URL}}js/djac-config.js" ></script>
     
+        <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
         {% block bottomheader %}{% endblock %}
     </head>
     <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
@@ -19,12 +20,5 @@
             </div>
             {% endblock %}
         </div>
-                <script type="text/javascript">
-          (function() {
-           var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-           po.src = 'https://apis.google.com/js/client:plusone.js';
-           var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-         })();
-        </script>
     </body>
 </html>
