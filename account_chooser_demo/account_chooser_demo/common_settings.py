@@ -186,7 +186,7 @@ ACCOUNT_CHOOSER_SETTINGS = {
                         'sitePhotoUrlId': '',
                         'providers': {
                                       "facebook.com":'/facebook/connect',
-                                      "twitter.com":''
+                                      "twitter.com":'/demo/twitter_auth'
                                       },
 }
 
