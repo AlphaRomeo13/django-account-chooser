@@ -10,7 +10,7 @@ from oauth2client.client import OAuth2WebServerFlow
 import tweepy
 from oauth2client.file import Storage
 
-from requests.sessions import session
+# from requests.sessions import session
 
 
 class Index (TemplateView):
@@ -72,7 +72,7 @@ def twitter_callback(request):
     # session.delete('request_token')
     # auth.set_request_token(token[0], token[1])
     try:
-       auth.get_access_token(request.GET['auth_verifier'])
+       auth.get_access_token(request.GET['oauth_verifier'])
     except tweepy.TweepError:
        print 'Error! Failed to get access token.'
     key = auth.access_token.key
