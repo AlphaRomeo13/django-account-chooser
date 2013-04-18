@@ -176,7 +176,7 @@ AUTHENTICATION_BACKENDS = (
 
 AUTH_PROFILE_MODULE = 'registration.registrationprofile'
 #TODO: configure LOGIN_REDIRECT_URL
-LOGIN_REDIRECT_URL = '/demo/facebook/'
+LOGIN_REDIRECT_URL = '/'
 
 ACCOUNT_CHOOSER_SETTINGS = {
                         'signupUrl': '/accounts/register/',
@@ -186,7 +186,7 @@ ACCOUNT_CHOOSER_SETTINGS = {
                         'sitePhotoUrlId': '',
                         'providers': {
                                       "facebook.com":'/facebook/connect',
-                                      "twitter.com":'/demo/twitter_auth'
+                                      "twitter.com":'/twitter_auth'
                                       },
 }
 

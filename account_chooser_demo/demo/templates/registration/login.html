@@ -3,24 +3,67 @@
 {% block body %}
 
 {% if form.errors %}
-<p>Your username and password didn't match. Please try again.</p>
+<p>
+	Your username and password didn't match. Please try again.
+</p>
 {% endif %}
 
-<form method="post" action="{% url django.contrib.auth.views.login %}">{% csrf_token %}
-<table>
-<tr>
-    <td>{{ form.username.label_tag }}</td>
-    <td>{{ form.username }}</td>
-</tr>
-<tr>
-    <td>{{ form.password.label_tag }}</td>
-    <td>{{ form.password }}</td>
-</tr>
-</table>
-<p><a href="{% url auth_password_reset %}">Forgot</a> your password?  <a href="{% url registration_register %}">Need an account</a>?</p>
+<form method="post" action="{% url django.contrib.auth.views.login %}">
+	{% csrf_token %}
+	<table>
+		<tr>
+			<td>{{ form.username.label_tag }}</td>
+			<td>{{ form.username }}</td>
+		</tr>
+		<tr>
+			<td>{{ form.password.label_tag }}</td>
+			<td>{{ form.password }}</td>
+		</tr>
+	</table>
+	<p>
+		<a href="{% url auth_password_reset %}">Forgot</a> your password? <a href="{% url registration_register %}">Need an account</a>?
+	</p>
 
-<input type="submit" value="login" />
-<input type="hidden" name="next" value="{{ next }}" />
+	<input type="submit" value="login" />
+	<input type="hidden" name="next" value="{{ next }}" />
 </form>
+<img src="http://e.fashiocdn.com/images/b_signin_facebook_small.png" onclick="F.connect(this.parentNode.parentNode); return false;"/>
 
+<a href="/demo/twitter_auth"> <img src="https://dev.twitter.com/sites/default/files/images_documentation/sign-in-with-twitter-gray.png" alt="signup with twitter"/> </a>
+
+<span id="signinButton"> <span
+	class="g-signin"
+	data-callback="signinCallback"
+	data-clientid="308413983615.apps.googleusercontent.com"
+	data-cookiepolicy="single_host_origin"
+	data-requestvisibleactions="http://schemas.google.com/AddActivity"
+	data-scope="https://www.googleapis.com/auth/plus.login"> </span> </span>
+
+<script type="text/javascript">
+	(function() {
+		var po = document.createElement('script');
+		po.type = 'text/javascript';
+		po.async = true;
+		po.src = 'https://apis.google.com/js/client:plusone.js';
+		var s = document.getElementsByTagName('script')[0];
+		s.parentNode.insertBefore(po, s);
+	})();
+	function signinCallback(authResult) {
+		if (authResult['access_token']) {
+
+			// uncomment the next line to hide signin with google after authorize user
+			// document.getElementById('signinButton').setAttribute('style', 'display: none');
+			alert("success");
+
+		} else if (authResult['error']) {
+			// There was an error.
+			// Possible error codes:
+			//   "access_denied" - User denied access to your app
+			//   "immediate_failed" - Could not automatially log in the user
+			// console.log('There was an error: ' + authResult['error']);
+			// alert("error");
+			alert("not authorized yet press 'login with twitter' to signin ");
+		}
+	}
+</script>
 {% endblock %}
