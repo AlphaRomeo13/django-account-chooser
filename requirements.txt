@@ -1,4 +1,4 @@
-django==1.4
+Django==1.4
 django-registration
 django-extensions
 django-debug-toolbar

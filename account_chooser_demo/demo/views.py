@@ -1,25 +1,12 @@
 # Create your views here.
 from django.views.generic.base import TemplateView
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
-# from django.utils import simplejson as json
 from django.conf import settings
 import tweepy
 
 
-def index(request):
-    return render(request, "demo/index.html")
-
-
-def facebook_signup(request):
-    return render(request, "demo/facebook_signup.html")
-
-
-def twitter_signup(request):    
-    return render(request, "demo/twitter_signup.html")
-
-def profile(request):
-	return render(request, 'demo/yah.html')
+class Index (TemplateView):
+    template_name = 'demo/index.html'
 
 
 def twitter_auth(request):
@@ -54,8 +41,3 @@ def twitter_auth(request):
 #     print 'Error! Failed to get access token.'
 
 
-
-
-
-class Index (TemplateView):
-    template_name = 'demo/index.html'
