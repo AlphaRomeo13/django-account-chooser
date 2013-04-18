@@ -198,7 +198,10 @@ ACCOUNT_CHOOSER_SETTINGS = {
                         'sitePasswordId': 'id_password',
                         'siteDisplayNameId': 'id_username',
                         'sitePhotoUrlId': '',
-                        'providers': ["facebook.com", "twitter.com"],
+                        'providers': {
+                                      "facebook.com":'/facebook/connect',
+                                      "twitter.com":''
+                                      },
 }
 
 ACCOUNT_ACTIVATION_DAYS = 7

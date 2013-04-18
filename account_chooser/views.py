@@ -33,9 +33,10 @@ class UserStatus (View):
         return super(UserStatus, self).dispatch(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-
+        from account_chooser.settings import ACCOUNT_CHOOSER_PROVIDERS
         if 'providerId' in request.POST.keys():
-            response_data = {"authUri":"IP-uri"}
+            provider = request.POST.get('providerId')
+            response_data = {"authUri": ACCOUNT_CHOOSER_PROVIDERS[provider]}
         elif User.objects.filter(email=request.POST['email']).exists():
             response_data = {"registered":True}
         else:

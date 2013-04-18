@@ -1,7 +1,5 @@
 # Django settings for account_chooser_demo project.
 import django.conf.global_settings as DEFAULT_SETTINGS
-import os
-import sys
 
 
 DEBUG = True
@@ -203,7 +201,10 @@ ACCOUNT_CHOOSER_SETTINGS = {
                         'sitePasswordId': 'id_password',
                         'siteDisplayNameId': 'id_username',
                         'sitePhotoUrlId': '',
-                        'providers': ["facebook.com", "twitter.com"],
+                        'providers': {
+                                      "facebook.com":'/facebook/connect',
+                                      "twitter.com":''
+                                      },
 }
 
 ACCOUNT_ACTIVATION_DAYS = 7
@@ -219,3 +220,7 @@ CONSTUMER_SECRET = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
 ACCESS_TOKEN = '200993161-IRwQvdUwg7KTWrsmzPFm5uP9CY81nreLTpMjzaa2'
 ACCESS_SECRET = 'dpqNIZHGC5Kxqsgz2CuUO3keAMUS3ZyeLWnsITHjk'
 # remember to confiure the call_back URL in you twitter app. setting page
+
+MODE = 'django_registration'
+
+FACEBOOK_REGISTRATION_BACKEND = 'registration_backends.DjangoRegistrationDefaultBackend'

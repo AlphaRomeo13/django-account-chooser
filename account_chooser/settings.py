@@ -14,7 +14,7 @@ def _get_settings():
         'sitePhotoUrlId': '',  # Profile photo URL input field ID in the signup form. Can be set to null or empty if your signup form does not need the user's profile picture.
         'uiConfig': '',  # Values to use in customizing the appearance of the AccountChooser page
         'language': 'en',  # The display language of the AccountChooser page
-        'providers': [],  # List of supported Identity Providers, usually given by top-level domain name, for example "facebook.com".
+        'providers': {},  # List of supported Identity Providers, usually given by top-level domain name, for example "facebook.com".
                         }
     _settings = getattr(settings,
                         'ACCOUNT_CHOOSER_SETTINGS', _default_settings)
@@ -23,6 +23,9 @@ def _get_settings():
         if key not in _settings:
             _settings.update({key: _default_settings[key]})
 
-    return _settings
+    providers = _settings['providers']
+    _settings['providers'] = _settings['providers'].keys()
 
-ACCOUNT_CHOOSER_SETTINGS = _get_settings()
+    return _settings, providers
+
+ACCOUNT_CHOOSER_SETTINGS, ACCOUNT_CHOOSER_PROVIDERS = _get_settings()
