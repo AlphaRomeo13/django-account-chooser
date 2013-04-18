@@ -2,10 +2,13 @@
 from django.views.generic.base import TemplateView
 from django.http import HttpResponseRedirect
 from django.conf import settings
-import tweepy
 from django.shortcuts import render
 from django.contrib.admindocs.views import extract_views_from_urlpatterns,\
     simplify_regex
+
+from oauth2client.client import OAuth2WebServerFlow
+import tweepy
+
 #from requests.sessions import session
 
 
@@ -50,6 +53,16 @@ def twitter_auth(request):
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     auth_url = auth.get_authorization_url()
     return HttpResponseRedirect(auth_url)
+
+def gplus_auth(request):
+
+    flow = OAuth2WebServerFlow(client_id='308413983615.apps.googleusercontent.com',
+                               client_secret='GboICNuFvxGbB679f0hUNbRl',
+                               scope='https://www.googleapis.com/auth/plus.login',
+                               redirect_uri='http://localhost:8000/gplus_callback')
+    auth_url = flow.step1_get_authorize_url()
+    return HttpResponseRedirect(auth_url)
+
 
 
 #def twitter_callback(request):
