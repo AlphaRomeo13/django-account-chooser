@@ -72,13 +72,12 @@ def twitter_callback(request):
     # session.delete('request_token')
     # auth.set_request_token(token[0], token[1])
     try:
-       auth.get_access_token(request.GET['verifier'])
+       auth.get_access_token(request.GET['auth_verifier'])
     except tweepy.TweepError:
        print 'Error! Failed to get access token.'
     key = auth.access_token.key
     secret = auth.access_token.secret
     context = {"key":key, "secret": secret }
-    context = {"key":"key", "secret": "secret" }
     return render(request,'demo/success_twitter.html',context)
     # uncomment the next 2 lines rebuild the user session with twitter
     # auth.set_access_token(key, secret)
