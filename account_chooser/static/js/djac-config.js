@@ -3,7 +3,7 @@ accountchooser.CONFIG={
     language: "en",
     signupUrl: "/accounts/register/",
     providers: ['facebook.com', 'twitter.com'],
-    homeUrl: "/demo/facebook/",
+    homeUrl: "/",
     uiConfig: "",
     siteDisplayNameId: "id_username",
     sitePhotoUrlId: "",
