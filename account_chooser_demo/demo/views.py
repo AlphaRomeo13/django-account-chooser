@@ -70,7 +70,7 @@ def twitter_callback(request):
     auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET)
     token = request.GET('oauth_verifier')
     # session.delete('request_token')
-    auth.set_request_token(token[0], token[1])
+    auth.set_request_token(token)
     try:
        auth.get_access_token(request.GET['oauth_verifier'])
     except tweepy.TweepError:
