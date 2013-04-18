@@ -68,8 +68,8 @@ def gplus_auth(request):
 
 def twitter_callback(request):
     auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET)
-    token = request.GET['oauth_token']
-    # session.delete('request_token')
+    token = request.session.get('request_token')
+    request.session.delete('request_token')
     auth.set_request_token(token[0], token[1])
     try:
        auth.get_access_token(request.GET['oauth_verifier'])
