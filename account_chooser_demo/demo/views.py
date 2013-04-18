@@ -68,12 +68,11 @@ def gplus_auth(request):
 
 def twitter_callback(request):
     auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET)
-    token = request.session.get('request_token')
-    context = {"key":token, "secret": "secret" }
-    return render(request,'demo/success_twitter.html',context)
-    print token
-    request.session.delete('request_token')
-    auth.set_request_token(token[0], token[1])
+    # token = request.session.get('request_token')
+    # context = {"key":token, "secret": "secret" }
+    # return render(request,'demo/success_twitter.html',context)
+    # request.session.delete('request_token')
+    auth.set_request_token(settings.ACCESS_TOKEN, settings.ACCESS_SECRET)
     try:
        auth.get_access_token(request.GET['oauth_verifier'])
     except tweepy.TweepError:
@@ -84,6 +83,7 @@ def twitter_callback(request):
     # auth.set_access_token(key, secret)
     # auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
     # api = tweepy.API(auth)
+    
 def gplus_callback(request):
     flow = OAuth2WebServerFlow(client_id='308413983615.apps.googleusercontent.com',
                                client_secret='GboICNuFvxGbB679f0hUNbRl',
