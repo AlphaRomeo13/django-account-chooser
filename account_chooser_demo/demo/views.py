@@ -68,18 +68,17 @@ def gplus_auth(request):
 
 def twitter_callback(request):
     auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET)
-    # token = request.session.get('request_token')
-    # context = {"key":token, "secret": "secret" }
-    # return render(request,'demo/success_twitter.html',context)
-    # request.session.delete('request_token')
-    # auth.set_request_token(settings.ACCESS_TOKEN, settings.ACCESS_SECRET)
-    try:
-       auth.get_access_token(request.GET['oauth_verifier'])
-    except tweepy.TweepError:
-        raise("can not find access")
-        print 'Error! Failed to get access token.'
+    token = request.session.get('request_token')
+    request.session.delete('request_token')
+    auth.set_request_token(token[0], token[1])
+    # try:
+    auth.get_access_token(verifier)
+    # except tweepy.TweepError:
+        # print 'Error! Failed to get access token.'
     key = auth.access_token.key
     secret = auth.access_token.secret
+    context = {'key' : key , 'secret': secret}
+    return render(request,'demo/success_twitter.html',context)
     # uncomment the next 2 lines rebuild the user session with twitter
     # auth.set_access_token(key, secret)
     # auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
