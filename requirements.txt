@@ -9,3 +9,4 @@ coveralls
 tweepy
 psycopg2==2.4.6
 gunicorn==0.17.2
+oauth2client
