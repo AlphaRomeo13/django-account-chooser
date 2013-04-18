@@ -8,8 +8,9 @@ from django.contrib.admindocs.views import extract_views_from_urlpatterns,\
 
 from oauth2client.client import OAuth2WebServerFlow
 import tweepy
+from oauth2client.file import Storage
 
-#from requests.sessions import session
+# from requests.sessions import session
 
 
 class Index (TemplateView):
@@ -65,20 +66,34 @@ def gplus_auth(request):
 
 
 
-#def twitter_callback(request):
-#    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET)
-#    token = session.get('request_token')
-#    session.delete('request_token')
-#    auth.set_request_token(token[0], token[1])
-#    try:
-#        auth.get_access_token(verifier)
-#    except tweepy.TweepError:
-#        print 'Error! Failed to get access token.'
-#    key = auth.access_token.key
-#    secret = auth.access_token.secret
-#    context = {"key":key, "secret": secret }
-#    return render(request,'demo/success_twitter.html',context)
-#    # uncomment the next 2 lines rebuild the user session with twitter
-#    # auth.set_access_token(key, secret)
-#    # auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-#    # api = tweepy.API(auth)
+def twitter_callback(request):
+    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET)
+    # token = session.get('request_token')
+    # session.delete('request_token')
+    # auth.set_request_token(token[0], token[1])
+    # try:
+    #    auth.get_access_token(verifier)
+    # except tweepy.TweepError:
+    #    print 'Error! Failed to get access token.'
+    # key = auth.access_token.key
+    # secret = auth.access_token.secret
+    # context = {"key":key, "secret": secret }
+    context = {"key":"key", "secret": "secret" }
+    return render(request,'demo/success_twitter.html',context)
+    # uncomment the next 2 lines rebuild the user session with twitter
+    # auth.set_access_token(key, secret)
+    # auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    # api = tweepy.API(auth)
+def gplus_callback(request):
+    flow = OAuth2WebServerFlow(client_id='308413983615.apps.googleusercontent.com',
+                               client_secret='GboICNuFvxGbB679f0hUNbRl',
+                               scope='https://www.googleapis.com/auth/plus.login',
+                               redirect_uri='http://localhost:8000/gplus_callback')
+    
+    credentials = flow.step2_exchange(request.GET['code'])
+
+    storage = Storage('testing.txt') # prepare file to store user info in it
+    storage.put(credentials) #storing user info in file 
+    # credentials = storage.get() #restore user info from file 
+    context = {"info" :  credentials}
+    return render(request,'demo/success_gplus.html',context)
