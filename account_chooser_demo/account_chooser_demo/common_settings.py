@@ -200,8 +200,8 @@ FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
 # twitter settings
 CONSTUMER_KEY = "v8wsuWmpbmoKX7IPfEr49A"
 CONSTUMER_SECRET = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
-ACCESS_TOKEN = '200993161-IRwQvdUwg7KTWrsmzPFm5uP9CY81nreLTpMjzaa2'
-ACCESS_SECRET = 'dpqNIZHGC5Kxqsgz2CuUO3keAMUS3ZyeLWnsITHjk'
+ACCESS_TOKEN = '200993161-8ortaWA9zpJXY0fu9nKotldSPykHy0C6eWXgQlV7'
+ACCESS_SECRET = 'KUC6uQuufk68eJH124Gv6aVcFiB34QVepmVgpgmJg4'
 # remember to confiure the call_back URL in you twitter app. setting page
 
 MODE = 'django_registration'
