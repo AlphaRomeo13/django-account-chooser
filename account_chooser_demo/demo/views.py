@@ -51,7 +51,8 @@ class Index (TemplateView):
 def twitter_auth(request):
     consumer_key = settings.CONSTUMER_KEY
     consumer_secret = settings.CONSTUMER_SECRET
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+    call_back = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret,call_back)
     auth_url = auth.get_authorization_url()
     return HttpResponseRedirect(auth_url)
 
@@ -67,12 +68,13 @@ def gplus_auth(request):
 
 
 def twitter_callback(request):
-    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET)
+    call_back = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
+    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET,call_back)
     # token = request.session.get('request_token')
     # request.session.delete('request_token')
     # auth.set_request_token(token[0], token[1])
     # try:
-    auth.set_request_token(settings.ACCESS_TOKEN,settings.ACCESS_SECRET)
+    # auth.set_request_token(settings.ACCESS_TOKEN,settings.ACCESS_SECRET)
     auth.get_access_token(request.GET['oauth_verifier'])
     # except tweepy.TweepError:
         # print 'Error! Failed to get access token.'
