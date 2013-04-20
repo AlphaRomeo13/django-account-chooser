@@ -70,6 +70,8 @@ def gplus_auth(request):
 def twitter_callback(request):
     call_back = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
     auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET,call_back)
+    auth.set_request_token(settings.ACCESS_TOKEN, settings.ACCESS_SECRET)
+    # auth_url = auth.get_authorization_url()
     # token = request.session.get('request_token')
     # request.session.delete('request_token')
     # auth.set_request_token(token[0], token[1])
