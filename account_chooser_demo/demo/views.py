@@ -52,7 +52,7 @@ def twitter_auth(request):
     consumer_key = settings.CONSTUMER_KEY
     consumer_secret = settings.CONSTUMER_SECRET
     call_back = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret,call_back)
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret,call_back,secure=True)
     auth_url = auth.get_authorization_url()
     return HttpResponseRedirect(auth_url)
 
