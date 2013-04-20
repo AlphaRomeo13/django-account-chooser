@@ -52,7 +52,7 @@ def twitter_auth(request):
     consumer_key = settings.CONSTUMER_KEY
     consumer_secret = settings.CONSTUMER_SECRET
     call_back = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret,call_back,secure=True)
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret,call_back)
     auth_url = auth.get_authorization_url()
     return HttpResponseRedirect(auth_url)
 
@@ -69,7 +69,8 @@ def gplus_auth(request):
 
 def twitter_callback(request):
     call_back = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
-    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET,call_back,secure=True)
+    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET,call_back)
+    auth.set_request_token(request.GET['oauth_token'], request.GET['oauth_verifier'])
     # auth.set_request_token(request.GET['oauth_token'])
     # auth_url = auth.get_authorization_url()
     # token = request.session.get('request_token')
