@@ -1,19 +1,22 @@
 #!/usr/bin/env python
-import os
-import sys
+from django.core.management import execute_manager
+import imp
 
 # hack to allow importing account_chooser
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
-                                     os.path.pardir)))
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
+#                                     os.path.pardir)))
+
+try:
+    imp.find_module('account_chooser_demo/settings')
+except ImportError:
+    import sys
+    sys.stderr.write("Error: Can't find file 'settings.py' in the directory"
+                     " containing %r. It appears you've customized things."
+                     "\nYou'll have to run django-admin.py, passing it your"
+                     " settings module.\n" % __file__)
+    sys.exit(1)
+
+import account_chooser_demo.settings as settings
+
 if __name__ == "__main__":
-    if os.getenv('RUN_ENV') == 'development':
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                              "account_chooser_demo.settings")
-    else:
-        os.environ.setdefault("DJANGO_SETTINGS_MODULE",
-                              "account_chooser_demo.heroku_settings")
-
-    from django.core.management import execute_from_command_line
-
-    execute_from_command_line(sys.argv)
-
+    execute_manager(settings)

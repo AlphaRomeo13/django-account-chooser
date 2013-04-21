@@ -1,1 +1,0 @@
-web: gunicorn account_chooser_demo.account_chooser_demo.wsgi
