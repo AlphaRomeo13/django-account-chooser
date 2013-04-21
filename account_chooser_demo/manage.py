@@ -5,7 +5,6 @@ import sys
 # hack to allow importing account_chooser
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__),
                                      os.path.pardir)))
-
 if __name__ == "__main__":
     if os.getenv('RUN_ENV') == 'development':
         os.environ.setdefault("DJANGO_SETTINGS_MODULE",
