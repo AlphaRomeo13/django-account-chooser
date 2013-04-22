@@ -1,0 +1,9 @@
+Django==1.4
+Pillow
+south
+
+django-registration
+django_facebook
+oauth2client
+tweepy
+

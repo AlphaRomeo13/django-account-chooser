@@ -1,0 +1,6 @@
+-r base-requirements.pip
+
+django-extensions
+django-debug-toolbar
+
+coveralls
