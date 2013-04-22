@@ -38,10 +38,9 @@ class UserStatus (View):
             provider = request.POST.get('providerId')
             response_data = {"authUri": ACCOUNT_CHOOSER_PROVIDERS[provider]}
         elif User.objects.filter(email=request.POST['email']).exists():
-            response_data = {"registered":True}
+            response_data = {"registered": True}
         else:
-            response_data = {"registered":False}
-        print response_data
+            response_data = {"registered": False}
         return HttpResponse(json.dumps(response_data),
                             mimetype="application/json")
 
@@ -53,6 +52,9 @@ class StoreAccount (View):
     this is a fast, efficient no-op.
     '''
     @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return View.dispatch(self, request, *args, **kwargs)
+
     def get(self, request, *args, **kwargs):
         from account_chooser.settings import ACCOUNT_CHOOSER_SETTINGS
         redirect_to = request.REQUEST.get('next',

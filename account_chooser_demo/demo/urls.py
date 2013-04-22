@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, url
 from demo.views import Index
 
-urlpatterns = patterns('account_chooser.views',
+urlpatterns = patterns('',
     url(r'^$', Index.as_view(), name='demo_index'),
 #    url(r'facebook/$', facebook_signup, name='demo_facebook'),
 #    url(r'twitter/$', twitter_signup, name='demo_twitter'),
