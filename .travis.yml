@@ -4,7 +4,7 @@ python:
 # command to install dependencies
 install: "pip install -r requirements/requirements.pip"
 # command to run tests
-script: coverage run --source="." account_chooser_demo/manage.py test account_chooser
+script: coverage run --rcfile="./.coveragerc" account_chooser_demo/manage.py test account_chooser
 
 after_success:
     coveralls

@@ -10,3 +10,5 @@ env/
 account_chooser_demo/static
 static/
 *.orig
+*~
+html_coverage_report/

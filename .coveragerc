@@ -1,0 +1,7 @@
+[run]
+branch = True
+source = account_chooser/
+omit = account_chooser/tests/*
+
+[html]
+directory = html_coverage_report
