@@ -4,6 +4,10 @@ from django.core.urlresolvers import reverse
 
 
 class AccountChooserMiddleware(object):
+    '''
+    intercept any successful signin or signup, allow accountchooser to store
+    the account then redirects back to the default redirect url
+    '''
     def process_response(self, request, response):
         if request.path in [s['loginUrl'], s['signupUrl']]:
             if isinstance(response, HttpResponseRedirect):
