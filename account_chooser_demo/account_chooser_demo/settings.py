@@ -236,17 +236,22 @@ ACCOUNT_CHOOSER_SETTINGS = {
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
+#face book settings
 FACEBOOK_APP_ID = "422724461106816"
 FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
-
+FACEBOOK_REGISTRATION_BACKEND = 'registration_backends.DjangoRegistrationDefaultBackend'
 
 # twitter settings
-CONSTUMER_KEY = "v8wsuWmpbmoKX7IPfEr49A"
-CONSTUMER_SECRET = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
-ACCESS_TOKEN = '200993161-8ortaWA9zpJXY0fu9nKotldSPykHy0C6eWXgQlV7'
-ACCESS_SECRET = 'KUC6uQuufk68eJH124Gv6aVcFiB34QVepmVgpgmJg4'
-# remember to confiure the call_back URL in you twitter app. setting page
+CONSTUMER_KEY       = "v8wsuWmpbmoKX7IPfEr49A"
+CONSTUMER_SECRET    = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
+ACCESS_TOKEN        = '200993161-8ortaWA9zpJXY0fu9nKotldSPykHy0C6eWXgQlV7'
+ACCESS_SECRET       = 'KUC6uQuufk68eJH124Gv6aVcFiB34QVepmVgpgmJg4'
+CALLBACK            = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
+
+#gplus_settings 
+CLIENT_ID       ="308413983615.apps.googleusercontent.com"
+CLIENT_SECRET   ="GboICNuFvxGbB679f0hUNbRl"
+SCOPE           ='https://www.googleapis.com/auth/plus.login'
+REDIRECT_URI    ='http://localhost:8000/gplus_callback'
 
 MODE = 'django_registration'
-
-FACEBOOK_REGISTRATION_BACKEND = 'registration_backends.DjangoRegistrationDefaultBackend'

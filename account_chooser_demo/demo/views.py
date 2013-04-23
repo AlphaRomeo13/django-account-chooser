@@ -42,24 +42,23 @@ class Index (TemplateView):
 def twitter_auth(request):
     consumer_key = settings.CONSTUMER_KEY
     consumer_secret = settings.CONSTUMER_SECRET
-    call_back = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
+    call_back = settings.CALLBACK
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret, call_back)
     auth_url = auth.get_authorization_url()
     return HttpResponseRedirect(auth_url)
 
 
 def gplus_auth(request):
-    flow = OAuth2WebServerFlow(client_id='308413983615.apps.googleusercontent.com',
-                           client_secret='GboICNuFvxGbB679f0hUNbRl',
-                           scope='https://www.googleapis.com/auth/plus.login',
-                           redirect_uri='http://localhost:8000/gplus_callback')
+    flow = OAuth2WebServerFlow(client_id    =settings.CLIENT_ID,
+                           client_secret    =settings.CLIENT_SECRET,
+                           scope            =settings.SCOPE,
+                           redirect_uri     =settings.REDIRECT_URI)
     auth_url = flow.step1_get_authorize_url()
     return HttpResponseRedirect(auth_url)
 
 
 def twitter_callback(request):
-    call_back = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
-    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET, call_back)
+    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET, settings.CALLBACK)
     auth.set_request_token(request.GET['oauth_token'], request.GET['oauth_verifier'])
     auth.get_access_token(request.GET['oauth_verifier'])
     key = auth.access_token.key
