@@ -1,9 +1,25 @@
 from django.test import TestCase
 from django.conf import settings
 
+from account_chooser.settings import  ACCOUNT_CHOOSER_SETTINGS
 
 
-class SettingTestCase(TestCase):
+class ManagementCommandTest(TestCase):
+
+    def test_mycommand_failure(self):
+        call_command('configureac', *args, **opts)
+
+class GetAccountChooserSettingsTest(TestCase):
+
+
+	def test_update_default_settings(self):
+		for key in ACCOUNT_CHOOSER_SETTINGS.keys():
+			if key in settings.ACCOUNT_CHOOSER_SETTINGS:
+				self.assertEqual(ACCOUNT_CHOOSER_SETTINGS[key],settings.ACCOUNT_CHOOSER_SETTINGS[key])
+
+
+
+class SocialKeysTest(TestCase):
 
 
 	def test_facebook_settings(self):
@@ -51,3 +67,9 @@ class SettingTestCase(TestCase):
 		self.assertNotEqual(len(settings.ACCOUNT_CHOOSER_SETTINGS["siteEmailId"]),0)
 		self.assertNotEqual(len(settings.ACCOUNT_CHOOSER_SETTINGS["sitePasswordId"]),0)
 		self.assertNotEqual(len(settings.ACCOUNT_CHOOSER_SETTINGS["siteDisplayNameId"]),0)
+
+# self.assertEqual(ac_settings[0]["signupUrl"],settings.ACCOUNT_CHOOSER_SETTINGS["signupUrl"])
+# self.assertEqual(ac_settings[0]["siteEmailId"],settings.ACCOUNT_CHOOSER_SETTINGS["siteEmailId"])
+# self.assertEqual(ac_settings[0]["sitePasswordId"],settings.ACCOUNT_CHOOSER_SETTINGS["sitePasswordId"])
+# self.assertEqual(ac_settings[0]["siteDisplayNameId"],settings.ACCOUNT_CHOOSER_SETTINGS["siteDisplayNameId"])
+# self.assertEqual(ac_settings[0]["providers"],settings.ACCOUNT_CHOOSER_SETTINGS["providers"])

@@ -21,3 +21,6 @@ class Command(NoArgsCommand):
         template = get_template('account_chooser/djac-conf.txt')
         js_file = open(path_to_app + '/static/js/djac-config.js', 'w')
         js_file.write(template.render(_context))
+
+
+
