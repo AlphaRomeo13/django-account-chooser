@@ -1,31 +1,280 @@
-from django.conf import settings
-from django.core.urlresolvers import reverse
+# Django settings for account_chooser_demo project.
+import os
+import sys
+import imp
+import django.conf.global_settings as DEFAULT_SETTINGS
+
+PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__),
+                                     os.path.pardir, os.path.pardir))
+sys.path.append(PROJECT_DIR)
+
+ON_OPENSHIFT = False
+if 'OPENSHIFT_REPO_DIR' in os.environ.keys():
+    ON_OPENSHIFT = True
+
+print PROJECT_DIR
+default_keys = {'SECRET_KEY':
+                '=+i8bda@yme_b(j=r20*lnf36lnu3@c4fdhdqmjw42&amp;jw&amp;9f_v'}
+
+if ON_OPENSHIFT:
+    DEBUG = False
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'dfdma6i9i1pm3i',
+        'HOST': 'ec2-23-21-203-9.compute-1.amazonaws.com',
+        'PORT': 5432,
+        'USER': 'waalzkeqfqkqqr',
+        'PASSWORD': 'dgx2KCQw7HYsglBD2JOqwxH1Iv'
+        }
+    }
+    EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
+
+    imp.find_module('account_chooser_demo/openshiftlibs')
+    import openshiftlibs
+    use_keys = openshiftlibs.openshift_secure(default_keys)
+
+    MEDIA_ROOT = os.environ.get('OPENSHIFT_DATA_DIR', '')
+    STATIC_ROOT = os.path.join(PROJECT_DIR, '..', 'static')
+
+    INSTALLED_APPS = (
+    	'django.contrib.auth',
+		'django.contrib.contenttypes',
+		'django.contrib.sessions',
+		'django.contrib.sites',
+		'django.contrib.messages',
+		'django.contrib.staticfiles',
+		'django.contrib.admin',
+		'django.contrib.admindocs',
+
+		'registration',  # provide signup, login views for demo
+		'django_facebook',
+		'south',
+
+		'account_chooser',
+		'demo',
+	)
+
+    MIDDLEWARE_CLASSES = (
+		'django.middleware.common.CommonMiddleware',
+		'django.contrib.sessions.middleware.SessionMiddleware',
+		'django.middleware.csrf.CsrfViewMiddleware',
+		'django.contrib.auth.middleware.AuthenticationMiddleware',
+		'django.contrib.messages.middleware.MessageMiddleware',
+		'account_chooser.middleware.AccountChooserMiddleware',
+	)
+
+else:
+    DEBUG = True
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': 'account_chooser.db',
+        'USER': '',
+        'PASSWORD': '',
+        'HOST': '',
+        'PORT': '',
+        }
+    }
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    use_keys = default_keys
+
+    MEDIA_ROOT = 'media/'
+    STATIC_ROOT = 'static/'
+
+    INSTALLED_APPS = (
+		'django.contrib.auth',
+		'django.contrib.contenttypes',
+		'django.contrib.sessions',
+		'django.contrib.sites',
+		'django.contrib.messages',
+		'django.contrib.staticfiles',
+		'django.contrib.admin',
+		'django.contrib.admindocs',
+
+		'registration',  # provide signup, login views for demo
+		'django_facebook',
+        'django_extensions',
+	    'debug_toolbar',
+		'south',
+
+		'account_chooser',
+		'demo',
+	)
+
+    MIDDLEWARE_CLASSES = (
+		'django.middleware.common.CommonMiddleware',
+		'django.contrib.sessions.middleware.SessionMiddleware',
+		'django.middleware.csrf.CsrfViewMiddleware',
+		'django.contrib.auth.middleware.AuthenticationMiddleware',
+		'django.contrib.messages.middleware.MessageMiddleware',
+		'debug_toolbar.middleware.DebugToolbarMiddleware',
+		'account_chooser.middleware.AccountChooserMiddleware',
+	)
+
+ROOT_URLCONF = 'account_chooser_demo.urls'
+
+SECRET_KEY = use_keys['SECRET_KEY']
+
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = (
+    # ('Your Name', 'your_email@example.com'),
+)
+
+MANAGERS = ADMINS
+
+# Local time zone for this installation. Choices can be found here:
+# http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
+# although not all choices may be available on all operating systems.
+# On Unix systems, a value of None will cause Django to use the same
+# timezone as the operating system.
+# If running in a Windows environment this must be set to the same as your
+# system time zone.
+TIME_ZONE = 'America/Chicago'
+
+# Language code for this installation. All choices can be found here:
+# http://www.i18nguy.com/unicode/language-identifiers.html
+LANGUAGE_CODE = 'en-us'
+
+SITE_ID = 1
+
+# If you set this to False, Django will make some optimizations so as not
+# to load the internationalization machinery.
+USE_I18N = True
+
+# If you set this to False, Django will not format dates, numbers and
+# calendars according to the current locale.
+USE_L10N = True
+
+# If you set this to False, Django will not use timezone-aware datetimes.
+USE_TZ = True
+
+# URL that handles the media served from MEDIA_ROOT. Make sure to use a
+# trailing slash.
+# Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
+MEDIA_URL = '/media/'
+
+# URL prefix for static files.
+# Example: "http://media.lawrence.com/static/"
+STATIC_URL = '/static/'
+
+# Additional locations of static files
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
+
+# List of finder classes that know how to find static files in
+# various locations.
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+#    'django.contrib.staticfiles.finders.DefaultStorageFinder',
+)
+
+# List of callables that know how to import templates from various sources.
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+#     'django.template.loaders.eggs.Loader',
+)
 
 
-def _get_settings():
-    _default_settings = {
-        'loginUrl'          : getattr(settings, 'LOGIN_URL'),  # Login URL.
-        'signupUrl'         : '/accounts/signup/',  # Signup URL.
-        'userStatusUrl'     : reverse('account_chooser_get_user_status'),  # User status URL.
-        'homeUrl'           : getattr(settings, 'LOGIN_REDIRECT_URL'),  # Home page URL.
-        'siteEmailId'       : 'email',  # Email input field ID (HTML "id=" attribute value) in the signup and login forms.
-        'sitePasswordId'    : 'password',  # Password input field ID in the signup and login forms
-        'siteDisplayNameId' : '',  # Display name input field ID in the signup form. Can be set to null or empty if your signup form does not need the user's name.
-        'sitePhotoUrlId'    : '',  # Profile photo URL input field ID in the signup form. Can be set to null or empty if your signup form does not need the user's profile picture.
-        'uiConfig'          : '',  # Values to use in customizing the appearance of the AccountChooser page
-        'language'          : 'en',  # The display language of the AccountChooser page
-        'providers'         : {},  # List of supported Identity Providers, usually given by top-level domain name, for example "facebook.com".
-                        }
-    _settings = getattr(settings,
-                        'ACCOUNT_CHOOSER_SETTINGS', _default_settings)
+DEBUG_TOOLBAR_CONFIG = {
+    'TAG': 'html',
+}
 
-    for key in _default_settings.keys():
-        if key not in _settings:
-            _settings.update({key: _default_settings[key]})
+TEMPLATE_DIRS = (
+    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+)
 
-    providers = _settings['providers']
-    _settings['providers'] = _settings['providers'].keys()
 
-    return _settings, providers
+# A sample logging configuration. The only tangible logging
+# performed by this configuration is to send an email to
+# the site admins on every HTTP 500 error when DEBUG=False.
+# See http://docs.djangoproject.com/en/dev/topics/logging for
+# more details on how to customize your logging configuration.
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        }
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['mail_admins'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    }
+}
 
-ACCOUNT_CHOOSER_SETTINGS, ACCOUNT_CHOOSER_PROVIDERS = _get_settings()
+INTERNAL_IPS = ('127.0.0.1',)
+DEBUG_TOOLBAR_PANELS = (
+    'debug_toolbar.panels.version.VersionDebugPanel',
+    'debug_toolbar.panels.timer.TimerDebugPanel',
+    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+    'debug_toolbar.panels.headers.HeaderDebugPanel',
+    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+    'debug_toolbar.panels.template.TemplateDebugPanel',
+    'debug_toolbar.panels.sql.SQLDebugPanel',
+    'debug_toolbar.panels.signals.SignalDebugPanel',
+    'debug_toolbar.panels.logger.LoggingPanel',
+)
+
+# facebook settings
+TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
+    'django_facebook.context_processors.facebook',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'django_facebook.auth_backends.FacebookBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+AUTH_PROFILE_MODULE = 'registration.registrationprofile'
+#TODO: configure LOGIN_REDIRECT_URL
+LOGIN_REDIRECT_URL = '/'
+
+ACCOUNT_CHOOSER_SETTINGS = {
+                        'signupUrl': '/accounts/register/',
+                        'siteEmailId': 'id_email',
+                        'sitePasswordId': 'id_password',
+                        'siteDisplayNameId': 'id_username',
+                        'sitePhotoUrlId': '',
+                        'providers': {
+                                      "facebook.com": '/facebook/connect',
+                                      "twitter.com": '/twitter_auth',
+                                      "google.com.com": '/gplus_auth',
+                                      },
+}
+
+ACCOUNT_ACTIVATION_DAYS = 7
+
+FACEBOOK_APP_ID = "422724461106816"
+FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
+
+
+# twitter settings
+CONSTUMER_KEY = "v8wsuWmpbmoKX7IPfEr49A"
+CONSTUMER_SECRET = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
+ACCESS_TOKEN = '200993161-8ortaWA9zpJXY0fu9nKotldSPykHy0C6eWXgQlV7'
+ACCESS_SECRET = 'KUC6uQuufk68eJH124Gv6aVcFiB34QVepmVgpgmJg4'
+# remember to confiure the call_back URL in you twitter app. setting page
+
+MODE = 'django_registration'
+
+FACEBOOK_REGISTRATION_BACKEND = 'registration_backends.DjangoRegistrationDefaultBackend'
