@@ -30,7 +30,7 @@ if ON_OPENSHIFT:
     }
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
-    imp.find_module('openshiftlibs')
+    imp.find_module('account_chooser_demo/openshiftlibs')
     import openshiftlibs
     use_keys = openshiftlibs.openshift_secure(default_keys)
 
