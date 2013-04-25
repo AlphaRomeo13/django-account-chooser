@@ -30,12 +30,39 @@ if ON_OPENSHIFT:
     }
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
-    imp.find_module('openshiftlibs')
+    imp.find_module('account_chooser_demo/openshiftlibs')
     import openshiftlibs
     use_keys = openshiftlibs.openshift_secure(default_keys)
 
     MEDIA_ROOT = os.environ.get('OPENSHIFT_DATA_DIR', '')
     STATIC_ROOT = os.path.join(PROJECT_DIR, '..', 'static')
+
+    INSTALLED_APPS = (
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.sites',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'django.contrib.admin',
+        'django.contrib.admindocs',
+
+        'registration',  # provide signup, login views for demo
+        'django_facebook',
+        'south',
+
+        'account_chooser',
+        'demo',
+  )
+
+    MIDDLEWARE_CLASSES = (
+        'django.middleware.common.CommonMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'account_chooser.middleware.AccountChooserMiddleware',
+  )
 
 else:
     DEBUG = True
@@ -55,6 +82,51 @@ else:
     MEDIA_ROOT = 'media/'
     STATIC_ROOT = 'static/'
 
+    INSTALLED_APPS = (
+        'django.contrib.auth',
+        'django.contrib.contenttypes',
+        'django.contrib.sessions',
+        'django.contrib.sites',
+        'django.contrib.messages',
+        'django.contrib.staticfiles',
+        'django.contrib.admin',
+        'django.contrib.admindocs',
+
+        'registration',  # provide signup, login views for demo
+        'django_facebook',
+        'django_extensions',
+        'debug_toolbar',
+        'south',
+
+        'account_chooser',
+        'demo',
+  )
+
+    MIDDLEWARE_CLASSES = (
+        'django.middleware.common.CommonMiddleware',
+        'django.contrib.sessions.middleware.SessionMiddleware',
+        'django.middleware.csrf.CsrfViewMiddleware',
+        'django.contrib.auth.middleware.AuthenticationMiddleware',
+        'django.contrib.messages.middleware.MessageMiddleware',
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+        'account_chooser.middleware.AccountChooserMiddleware',
+    )
+
+    INTERNAL_IPS = ('127.0.0.1',)
+    DEBUG_TOOLBAR_PANELS = (
+        'debug_toolbar.panels.version.VersionDebugPanel',
+        'debug_toolbar.panels.timer.TimerDebugPanel',
+        'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
+        'debug_toolbar.panels.headers.HeaderDebugPanel',
+        'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
+        'debug_toolbar.panels.template.TemplateDebugPanel',
+        'debug_toolbar.panels.sql.SQLDebugPanel',
+        'debug_toolbar.panels.signals.SignalDebugPanel',
+        'debug_toolbar.panels.logger.LoggingPanel',
+    )
+    DEBUG_TOOLBAR_CONFIG = {
+        'TAG': 'html',
+    }
 
 ROOT_URLCONF = 'account_chooser_demo.urls'
 
@@ -125,19 +197,6 @@ TEMPLATE_LOADERS = (
 #     'django.template.loaders.eggs.Loader',
 )
 
-MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'account_chooser.middleware.AccountChooserMiddleware',
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
-)
-DEBUG_TOOLBAR_CONFIG = {
-    'TAG': 'html',
-}
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
@@ -145,25 +204,6 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'django.contrib.admin',
-    'django.contrib.admindocs',
-
-    'registration',  # provide signup, login views for demo
-    'django_extensions',
-    'debug_toolbar',
-    'django_facebook',
-    'south',
-
-    'account_chooser',
-    'demo',
-)
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
@@ -194,18 +234,6 @@ LOGGING = {
     }
 }
 
-INTERNAL_IPS = ('127.0.0.1',)
-DEBUG_TOOLBAR_PANELS = (
-    'debug_toolbar.panels.version.VersionDebugPanel',
-    'debug_toolbar.panels.timer.TimerDebugPanel',
-    'debug_toolbar.panels.settings_vars.SettingsVarsDebugPanel',
-    'debug_toolbar.panels.headers.HeaderDebugPanel',
-    'debug_toolbar.panels.request_vars.RequestVarsDebugPanel',
-    'debug_toolbar.panels.template.TemplateDebugPanel',
-    'debug_toolbar.panels.sql.SQLDebugPanel',
-    'debug_toolbar.panels.signals.SignalDebugPanel',
-    'debug_toolbar.panels.logger.LoggingPanel',
-)
 
 # facebook settings
 TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
@@ -236,6 +264,7 @@ ACCOUNT_CHOOSER_SETTINGS = {
 
 ACCOUNT_ACTIVATION_DAYS = 7
 
+
 #face book settings
 FACEBOOK_APP_ID = "422724461106816"
 FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
@@ -248,7 +277,7 @@ ACCESS_TOKEN        = '200993161-8ortaWA9zpJXY0fu9nKotldSPykHy0C6eWXgQlV7'
 ACCESS_SECRET       = 'KUC6uQuufk68eJH124Gv6aVcFiB34QVepmVgpgmJg4'
 CALLBACK            = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
 
-#gplus_settings 
+#gplus_settings
 CLIENT_ID       ="308413983615.apps.googleusercontent.com"
 CLIENT_SECRET   ="GboICNuFvxGbB679f0hUNbRl"
 SCOPE           ='https://www.googleapis.com/auth/plus.login'

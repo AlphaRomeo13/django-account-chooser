@@ -19,7 +19,7 @@ class Command(NoArgsCommand):
                                 '/'.join([os.path.pardir, os.path.pardir])))
         _context = Context(ACCOUNT_CHOOSER_SETTINGS)
         template = get_template('account_chooser/djac-conf.txt')
-        js_file = open(path_to_app + '/static/js/djac-config.js', 'w')
+        js_file = open(path_to_app + '/static/js/djac-config.js', 'w+')
         js_file.write(template.render(_context))
 
         
