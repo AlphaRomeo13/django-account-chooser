@@ -22,5 +22,4 @@ class Command(NoArgsCommand):
         js_file = open(path_to_app + '/static/js/djac-config.js', 'w')
         js_file.write(template.render(_context))
 
-
-
+        

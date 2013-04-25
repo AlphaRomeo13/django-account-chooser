@@ -2,7 +2,7 @@ accountchooser.CONFIG={
     sitePasswordId: "id_password",
     language: "en",
     signupUrl: "/accounts/register/",
-    providers: ['facebook.com', 'twitter.com'],
+    providers: ['facebook.com', 'twitter.com', 'google.com.com'],
     homeUrl: "/",
     uiConfig: "",
     siteDisplayNameId: "id_username",
