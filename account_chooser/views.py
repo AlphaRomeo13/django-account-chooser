@@ -38,9 +38,9 @@ class UserStatus (View):
             provider = request.POST.get('providerId')
             response_data = {"authUri": ACCOUNT_CHOOSER_PROVIDERS[provider]}
         elif User.objects.filter(email=request.POST['email']).exists():
-            response_data = {"registered": True}
+            response_data = {"registered":True}
         else:
-            response_data = {"registered": False}
+            response_data = {"registered":False}
         return HttpResponse(json.dumps(response_data),
                             mimetype="application/json")
 
