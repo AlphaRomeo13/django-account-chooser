@@ -276,12 +276,12 @@ CONSTUMER_KEY       = "v8wsuWmpbmoKX7IPfEr49A"
 CONSTUMER_SECRET    = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
 ACCESS_TOKEN        = '200993161-8ortaWA9zpJXY0fu9nKotldSPykHy0C6eWXgQlV7'
 ACCESS_SECRET       = 'KUC6uQuufk68eJH124Gv6aVcFiB34QVepmVgpgmJg4'
-CALLBACK            = "http://account-chooser-demo.herokuapp.com/demo/twitter_callback/"
+CALLBACK            = "https://djangoaccountchooser-myaser.rhcloud.com/demo/twitter_callback/"
 
 #gplus_settings
 CLIENT_ID       ="308413983615.apps.googleusercontent.com"
 CLIENT_SECRET   ="GboICNuFvxGbB679f0hUNbRl"
 SCOPE           ='https://www.googleapis.com/auth/plus.login'
-REDIRECT_URI    ='http://localhost:8000/gplus_callback'
+REDIRECT_URI    ='https://djangoaccountchooser-myaser.rhcloud.com/gplus_callback'
 
 MODE = 'django_registration'
