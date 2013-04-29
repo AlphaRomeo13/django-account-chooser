@@ -1,4 +1,6 @@
 from account_chooser.settings import ACCOUNT_CHOOSER_SETTINGS as ac_settings
+from django.test.utils import setup_test_environment
+
 from django.test import TestCase
 from django.test.client import Client
 
@@ -20,10 +22,10 @@ class BaseViewTestCase(TestCase):
 
 class AccountChooserMiddleWaretest(BaseViewTestCase):
 
-	def corrent_redirect_test(self):
+	def test_corrent_redirect(self):
 		login_response = self.client.get(ac_settings["loginUrl"])
 		signup_response = self.client.get(ac_settings["signupUrl"])
-		login_next = response.get('Location', None)
-		signup_next = response.get('Location', None)
+		login_next = login_response.get('Location', None)
+		signup_next = signup_response.get('Location', None)
 		self.assertNotEqual(login_next,None)
 		self.assertNotEqual(signup_next,None)
