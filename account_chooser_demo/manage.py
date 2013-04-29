@@ -17,6 +17,7 @@ except ImportError:
     sys.exit(1)
 
 import account_chooser_demo.settings as settings
+settings.ROOT_URLCONF = 'account_chooser_demo.urls'
 
 if __name__ == "__main__":
     execute_manager(settings)

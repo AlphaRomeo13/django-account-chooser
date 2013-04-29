@@ -7,6 +7,7 @@ import django.conf.global_settings as DEFAULT_SETTINGS
 PROJECT_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__),
                                      os.path.pardir, os.path.pardir))
 sys.path.append(PROJECT_DIR)
+sys.path.append(os.path.join(PROJECT_DIR, 'account_chooser_demo'))
 
 ON_OPENSHIFT = False
 if 'OPENSHIFT_REPO_DIR' in os.environ.keys():
@@ -30,7 +31,6 @@ if ON_OPENSHIFT:
     }
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
 
-    imp.find_module('account_chooser_demo/openshiftlibs')
     import openshiftlibs
     use_keys = openshiftlibs.openshift_secure(default_keys)
 
@@ -63,6 +63,7 @@ if ON_OPENSHIFT:
         'django.contrib.messages.middleware.MessageMiddleware',
         'account_chooser.middleware.AccountChooserMiddleware',
   )
+    ROOT_URLCONF = 'account_chooser_demo.account_chooser_demo.urls'
 
 else:
     DEBUG = True
@@ -128,7 +129,7 @@ else:
         'TAG': 'html',
     }
 
-ROOT_URLCONF = 'account_chooser_demo.urls'
+    ROOT_URLCONF = 'account_chooser_demo.urls'
 
 SECRET_KEY = use_keys['SECRET_KEY']
 

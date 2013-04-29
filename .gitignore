@@ -11,4 +11,6 @@ account_chooser_demo/static
 static/
 *.orig
 *~
+.metadata/
+wsgi/static/
 html_coverage_report/
