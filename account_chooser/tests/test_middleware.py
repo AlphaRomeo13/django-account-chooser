@@ -40,8 +40,8 @@ class AccountChooserMiddleWaretest(BaseViewTestCase):
                          ('http://testserver/accounts/store_account', 302))
         self.assertEqual(response.context['next'],
                          getattr(settings, 'LOGIN_REDIRECT_URL'))
-        self.assertEqual(response.template_name,
-                         'account_chooser/store_account.html')
+        self.assertIn('account_chooser/store_account.html',
+                      [template.name for template in response.templates])
 
     def test_login_get(self):
         response = self.client.get(getattr(settings, 'LOGIN_URL'))
