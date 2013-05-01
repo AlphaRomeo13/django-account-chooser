@@ -11,6 +11,7 @@ Quick start
 -----------
 
 1. Add "polls" to your INSTALLED_APPS settings::
+
 ```python
       INSTALLED_APPS = (
           ...
@@ -18,10 +19,12 @@ Quick start
       )
 ```
 2. Include the polls URLconf in your project urls.py::
+
 ```python
       url(r'^accounts/', include('account_chooser.urls')),
 ```
 3. add account-chooser middleware::
+
 ```python
       MIDDLEWARE_CLASSES = (
             ...
@@ -72,6 +75,7 @@ default is ``''``
      default is ``{}``
 
    Example configuration::
+
      ```python
       ACCOUNT_CHOOSER_SETTINGS = {
                         'signupUrl': '/accounts/register/',
@@ -88,6 +92,7 @@ default is ``''``
      ```
 
 5. Run the management command configureac to create the javascript file that manages ac.js::
+
 ```
       python manage.py configureac
 ```
