@@ -10,7 +10,7 @@ it is the django implementation of [account chooser](https://coveralls.io/r/myas
 Quick start
 -----------
 
-1. Add "polls" to your INSTALLED_APPS settings::
+1. Add "account_chooser" to your INSTALLED_APPS settings::
 
 ```python
       INSTALLED_APPS = (
@@ -18,7 +18,7 @@ Quick start
           'account_chooser',
       )
 ```
-2. Include the polls URLconf in your project urls.py::
+2. Include the account_chooser URLconf in your project urls.py::
 
 ```python
       url(r'^accounts/', include('account_chooser.urls')),
