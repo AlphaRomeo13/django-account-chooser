@@ -12,25 +12,28 @@ Quick start
 
 1. Add "account_chooser" to your INSTALLED_APPS settings::
 
-```python
+      ```python
       INSTALLED_APPS = (
           ...
           'account_chooser',
       )
-```
+      ```
+
 2. Include the account_chooser URLconf in your project urls.py::
 
-```python
+      ```python
       url(r'^accounts/', include('account_chooser.urls')),
-```
+      ```
+
 3. add account-chooser middleware::
 
-```python
+      ```python
       MIDDLEWARE_CLASSES = (
             ...
             'account_chooser.middleware.AccountChooserMiddleware',
         )
-```
+      ```
+
 4. Configure account-chooser in the settings::
 
     There are a few configuration options to ``account_chooser`` that
@@ -93,7 +96,13 @@ default is ``''``
 
 5. Run the management command configureac to create the javascript file that manages ac.js::
 
-```
+      ```
       python manage.py configureac
-```
+      ```
 
+6. Include th ac.js and djac-config.js in your base template
+
+      ```html
+      <script type="text/javascript" src="https://www.accountchooser.com/ac.js" ></script>
+      <script type="text/javascript" src="{{STATIC_URL}}js/djac-config.js" ></script>
+      ```
