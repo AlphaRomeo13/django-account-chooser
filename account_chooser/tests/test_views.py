@@ -66,8 +66,6 @@ class StoreAccountViewTest(BaseViewTestCase):
     def setUp(self):
         BaseViewTestCase.setUp(self)
         user = User.objects.get(username='registered')
-        user.set_password('123')
-        user.save()
         self.client.login(username=user.username, password='123')
 
     def test_url_mapping(self):

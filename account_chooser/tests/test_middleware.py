@@ -3,6 +3,10 @@ from django.test.utils import setup_test_environment
 
 from django.test import TestCase
 from django.test.client import Client
+from django.core.urlresolvers import resolve
+from django.contrib.auth.models import User
+from django.conf import settings
+from django.utils.unittest.case import skipIf
 
 
 class BaseViewTestCase(TestCase):
@@ -22,10 +26,38 @@ class BaseViewTestCase(TestCase):
 
 class AccountChooserMiddleWaretest(BaseViewTestCase):
 
-	def test_corrent_redirect(self):
-		login_response = self.client.get(ac_settings["loginUrl"])
-		signup_response = self.client.get(ac_settings["signupUrl"])
-		login_next = login_response.get('Location', None)
-		signup_next = signup_response.get('Location', None)
-		self.assertNotEqual(login_next,None)
-		self.assertNotEqual(signup_next,None)
+    def setUp(self):
+        BaseViewTestCase.setUp(self)
+        self.user = User.objects.get(username='registered')
+
+    def test_redirect_after_login(self):
+        post_data = {'username': self.user.username,
+                     'password': '123',
+                     }
+        response = self.client.post(getattr(settings, 'LOGIN_URL'),
+                                                data=post_data, follow=True)
+        self.assertEqual(response.redirect_chain[0],
+                         ('http://testserver/accounts/store_account', 302))
+        self.assertEqual(response.context['next'],
+                         getattr(settings, 'LOGIN_REDIRECT_URL'))
+        self.assertIn('account_chooser/store_account.html',
+                      [template.name for template in response.templates])
+
+    def test_login_get(self):
+        response = self.client.get(getattr(settings, 'LOGIN_URL'))
+        self.assertEqual(response.status_code, 200)
+        self.assertNotEqual(response.template_name,
+                            'account_chooser/store_account.html')
+
+#     def test_redirect_after_signup(self):
+#         post_data = {'username': 'temporary',
+#                      'email': 'temporary@example.com',
+#                      'password1': '123',
+#                      'password2': '123'
+#                      }
+#         response = self.client.post(ac_settings["signupUrl"],
+#                                                 data=post_data, follow=True)
+#         self.assertEqual(response.redirect_chain[0],
+#                          ('http://testserver/accounts/store_account', 302))
+#         self.assertEqual(response.context['next'],
+#                          getattr(settings, 'LOGIN_REDIRECT_URL'))
