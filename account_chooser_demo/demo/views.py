@@ -36,6 +36,7 @@ class Index (TemplateView):
     def get_context_data(self, **kwargs):
         context = super(Index, self).get_context_data(**kwargs)
         context['url_list'] = self._get_urls()
+        context["client_id"] = settings.CLIENT_ID
         return context
 
 

@@ -21,5 +21,46 @@
 {% endfor %}
 </ul>
 
+{# gplus sharing button #}
+<button
+  class="g-interactivepost"
+  data-contenturl="beta.kotob.me"
+  data-contentdeeplinkid="/pages"
+  data-clientid= {{ client_id }}
+  data-cookiepolicy="single_host_origin"
+  data-prefilltext="standred text to chang late"
+  data-calltoactionlabel="CREATE"
+  data-calltoactionurl="http://plus.google.com/pages/create"
+  data-calltoactiondeeplinkid="/pages/create">
+  Tell your friends
+</button>
+
+
+{# facebook invent people  #}
+ <div id="fb-root"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <p>
+    <input type="button"
+      onclick="sendRequestViaMultiFriendSelector(); return false;"
+      value="Send Request to Many Users with MFS"
+    />
+    </p>
+    
+    <script>
+      FB.init({
+        appId  : '422724461106816',
+        frictionlessRequests: true
+      });
+      function sendRequestViaMultiFriendSelector() {
+        FB.ui({method: 'apprequests',
+          message: 'My Great Request'
+        }, requestCallback);
+      }
+      
+      function requestCallback(response) {
+        // Handle callback here
+      }
+    </script>
+
 
 {% endblock %}
