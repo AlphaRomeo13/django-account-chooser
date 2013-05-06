@@ -21,12 +21,12 @@ if ON_OPENSHIFT:
     DEBUG = False
     DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dfdma6i9i1pm3i',
-        'HOST': 'ec2-23-21-203-9.compute-1.amazonaws.com',
-        'PORT': 5432,
-        'USER': 'waalzkeqfqkqqr',
-        'PASSWORD': 'dgx2KCQw7HYsglBD2JOqwxH1Iv'
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ['OPENSHIFT_APP_NAME'],
+        'HOST': os.environ['OPENSHIFT_MYSQL_DB_HOST'],
+        'PORT': os.environ['OPENSHIFT_MYSQL_DB_PORT'],
+        'USER': os.environ['OPENSHIFT_MYSQL_DB_USERNAME'],
+        'PASSWORD': os.environ['OPENSHIFT_MYSQL_DB_PASSWORD']
         }
     }
     EMAIL_BACKEND = 'django.core.mail.backends.dummy.EmailBackend'
