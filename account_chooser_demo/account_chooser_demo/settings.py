@@ -267,8 +267,9 @@ ACCOUNT_ACTIVATION_DAYS = 7
 
 
 #face book settings
-FACEBOOK_APP_ID = "422724461106816"
-FACEBOOK_APP_SECRET = "0bc28668441234924b6031faee86408b"
+FACEBOOK_APP_ID = "151760728335535"
+
+FACEBOOK_APP_SECRET = "16be7072df51d42c3ebb19a99db14bb5"
 FACEBOOK_REGISTRATION_BACKEND = 'registration_backends.DjangoRegistrationDefaultBackend'
 
 # twitter settings
@@ -276,7 +277,7 @@ CONSTUMER_KEY       = "v8wsuWmpbmoKX7IPfEr49A"
 CONSTUMER_SECRET    = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
 ACCESS_TOKEN        = '200993161-8ortaWA9zpJXY0fu9nKotldSPykHy0C6eWXgQlV7'
 ACCESS_SECRET       = 'KUC6uQuufk68eJH124Gv6aVcFiB34QVepmVgpgmJg4'
-CALLBACK            = "https://djangoaccountchooser-myaser.rhcloud.com/demo/twitter_callback/"
+CALLBACK            = "http://djac-myaser.rhcloud.com/twitter_callback/"
 
 #gplus_settings
 CLIENT_ID       ="308413983615.apps.googleusercontent.com"

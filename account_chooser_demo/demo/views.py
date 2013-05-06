@@ -37,6 +37,7 @@ class Index (TemplateView):
         context = super(Index, self).get_context_data(**kwargs)
         context['url_list'] = self._get_urls()
         context["client_id"] = settings.CLIENT_ID
+        context["FB_id"] = settings.FACEBOOK_APP_ID
         return context
 
 
