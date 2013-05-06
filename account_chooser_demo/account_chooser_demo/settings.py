@@ -283,6 +283,6 @@ CALLBACK            = "http://djac-myaser.rhcloud.com/twitter_callback/"
 CLIENT_ID       ="308413983615.apps.googleusercontent.com"
 CLIENT_SECRET   ="GboICNuFvxGbB679f0hUNbRl"
 SCOPE           ='https://www.googleapis.com/auth/plus.login'
-REDIRECT_URI    ='https://djangoaccountchooser-myaser.rhcloud.com/gplus_callback'
+REDIRECT_URI    ='https://djac-myaser.rhcloud.com/gplus_callback'
 
 MODE = 'django_registration'

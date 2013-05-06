@@ -51,10 +51,10 @@ def twitter_auth(request):
 
 
 def gplus_auth(request):
-    flow = OAuth2WebServerFlow(client_id='308413983615.apps.googleusercontent.com',
-                           client_secret='GboICNuFvxGbB679f0hUNbRl',
+    flow = OAuth2WebServerFlow(client_id=setting.CLIENT_ID,
+                           client_secret= settings.CLIENT_SECRET,
                            scope='https://www.googleapis.com/auth/plus.login',
-                           redirect_uri='https://djangoaccountchooser-myaser.rhcloud.com/gplus_callback')
+                           redirect_uri= settings.REDIRECT_URI)
     auth_url = flow.step1_get_authorize_url()
     return HttpResponseRedirect(auth_url)
 

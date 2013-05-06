@@ -21,6 +21,18 @@
 {% endfor %}
 </ul>
 
+<!-- Place this tag where you want the +1 button to render. -->
+<div class="g-plusone" data-annotation="none"></div>
+
+<!-- Place this tag after the last +1 button tag. -->
+<script type="text/javascript">
+  (function() {
+    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+    po.src = 'https://apis.google.com/js/plusone.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+  })();
+</script>
+
 {# gplus sharing button #}
 <button
   class="g-interactivepost"
@@ -63,4 +75,30 @@
     </script>
 
 
+
+    <a href="https://twitter.com/share" class="twitter-share-button"  data-lang="en" data-count="none" data-text ="this is leef for social media services">Tweet</a>
+    
+    <a href="https://twitter.com/intent/tweet?screen_name=Kotobdotme" class="twitter-mention-button" data-lang="en" data-text = "What a wonderful day ,hello form leef home">Tweet to @Kotobdotme</a>
+
+    <a href="https://twitter.com/Kotobdotme" class="twitter-follow-button" data-show-count="true" data-lang="en" >Follow @Kotobdotme</a>
+
+  {# script for twitter api buttons #}
+
+    <script>!function(d,s,id){
+      var js,fjs=d.getElementsByTagName(s)[0];
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src="https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js,fjs);}
+      }
+      (document,"script","twitter-wjs");
+    </script>
+
+    <hr>
+    <hr>
+
+
+    <hr>
+    <hr>
 {% endblock %}
