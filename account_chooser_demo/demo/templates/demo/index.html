@@ -7,17 +7,24 @@
 {% endblock %}
 
 {%block body%}
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=151760728335535";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 <h1>THIS IS INDEX PAGE</h1>
 <h2>LIST OF urls</h2>
 <ul>
-	{% for single_url in url_list %}
-		{% if 'admin' not in single_url %}
-			{% if '<' not in single_url%}
-			<li><a href="{{single_url}}"> {{single_url}} </a></li>
-			{% else %}
-			<li><a href="#"> {{single_url}} </a></li>
-			{% endif %}
-		{% endif %}
+  {% for single_url in url_list %}
+    {% if 'admin' not in single_url %}
+      {% if '<' not in single_url%}
+      <li><a href="{{single_url}}"> {{single_url}} </a></li>
+      {% else %}
+      <li><a href="#"> {{single_url}} </a></li>
+      {% endif %}
+    {% endif %}
 {% endfor %}
 </ul>
 
@@ -51,8 +58,12 @@
     <hr>
     <hr>
 
-{# facebook invent people  #}
+{# facebook #}
+
+
  <div id="fb-root"></div>
+
+    <div class="fb-like" data-href="https://www.facebook.com/kotob.me" data-send="true" data-width="450" data-show-faces="true" data-font="arial"></div>
     <script src="http://connect.facebook.net/en_US/all.js"></script>
     <p>
     <input type="button"
@@ -60,7 +71,7 @@
       value="invent your friends on FB"
     />
     </p>
-    
+    {# js for dialog "inventing people " #}
     <script>
       FB.init({
         appId  : {{ FB_id }},
