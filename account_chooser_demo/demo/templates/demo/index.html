@@ -21,17 +21,18 @@
 {% endfor %}
 </ul>
 
-<!-- Place this tag where you want the +1 button to render. -->
-<div class="g-plusone" data-annotation="none"></div>
 
-<!-- Place this tag after the last +1 button tag. -->
-<script type="text/javascript">
-  (function() {
-    var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-    po.src = 'https://apis.google.com/js/plusone.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-  })();
-</script>
+
+
+    <hr>
+    <hr>
+
+ {# +1 button for the kotob page on google plus  #}
+{# link to +1 must be public content or error will be raised #}
+{# need to change data-herf to gplus content that you want to +1 #}
+<div class="g-plusone" data-annotation="none" data-href="https://plus.google.com/u/0/102469820227970681291/posts/NhwH68DWvWx"></div>
+
+
 
 {# gplus sharing button #}
 <button
@@ -40,13 +41,15 @@
   data-contentdeeplinkid="/pages"
   data-clientid= {{ client_id }}
   data-cookiepolicy="single_host_origin"
-  data-prefilltext="standred text to chang late"
-  data-calltoactionlabel="CREATE"
-  data-calltoactionurl="http://plus.google.com/pages/create"
-  data-calltoactiondeeplinkid="/pages/create">
+  data-prefilltext="get books taste"
+  data-calltoactionlabel="FOLLOW"
+  data-calltoactionurl="beta.kotob.me"
+  >
   share on gplus
 </button>
 
+    <hr>
+    <hr>
 
 {# facebook invent people  #}
  <div id="fb-root"></div>
@@ -76,6 +79,10 @@
 
 
 
+    <hr>
+    <hr>
+
+
     <a href="https://twitter.com/share" class="twitter-share-button"  data-lang="en" data-count="none" data-text ="this is leef for social media services">Tweet</a>
     
     <a href="https://twitter.com/intent/tweet?screen_name=Kotobdotme" class="twitter-mention-button" data-lang="en" data-text = "What a wonderful day ,hello form leef home">Tweet to @Kotobdotme</a>
@@ -95,10 +102,4 @@
       (document,"script","twitter-wjs");
     </script>
 
-    <hr>
-    <hr>
-
-
-    <hr>
-    <hr>
 {% endblock %}
