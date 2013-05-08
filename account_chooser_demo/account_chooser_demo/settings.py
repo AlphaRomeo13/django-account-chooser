@@ -277,7 +277,7 @@ CONSTUMER_KEY       = "v8wsuWmpbmoKX7IPfEr49A"
 CONSTUMER_SECRET    = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
 ACCESS_TOKEN        = '200993161-8ortaWA9zpJXY0fu9nKotldSPykHy0C6eWXgQlV7'
 ACCESS_SECRET       = 'KUC6uQuufk68eJH124Gv6aVcFiB34QVepmVgpgmJg4'
-CALLBACK            = "http://djac-myaser.rhcloud.com/twitter_callback/"
+CALLBACK            = "https://djac-myaser.rhcloud.com/twitter_callback"
 
 #gplus_settings
 CLIENT_ID       ="308413983615.apps.googleusercontent.com"
