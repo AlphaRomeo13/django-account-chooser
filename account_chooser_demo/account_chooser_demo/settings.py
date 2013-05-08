@@ -246,7 +246,7 @@ AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
 )
 
-AUTH_PROFILE_MODULE = 'registration.registrationprofile'
+AUTH_PROFILE_MODULE = 'django_facebook.FacebookProfile'
 #TODO: configure LOGIN_REDIRECT_URL
 LOGIN_REDIRECT_URL = '/'
 
