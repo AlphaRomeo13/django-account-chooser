@@ -270,7 +270,7 @@ ACCOUNT_ACTIVATION_DAYS = 7
 FACEBOOK_APP_ID = "151760728335535"
 
 FACEBOOK_APP_SECRET = "16be7072df51d42c3ebb19a99db14bb5"
-FACEBOOK_REGISTRATION_BACKEND = 'registration_backends.DjangoRegistrationDefaultBackend'
+# FACEBOOK_REGISTRATION_BACKEND = 'registration_backends.DjangoRegistrationDefaultBackend'
 
 # twitter settings
 CONSTUMER_KEY       = "v8wsuWmpbmoKX7IPfEr49A"
