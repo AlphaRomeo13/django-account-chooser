@@ -18,7 +18,7 @@ default_keys = {'SECRET_KEY':
                 '=+i8bda@yme_b(j=r20*lnf36lnu3@c4fdhdqmjw42&amp;jw&amp;9f_v'}
 
 if ON_OPENSHIFT:
-    DEBUG = False
+    DEBUG = True
     DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
