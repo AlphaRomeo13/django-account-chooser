@@ -69,13 +69,9 @@ def twitter_callback(request):
 
 def gplus_callback(request):
     flow = OAuth2WebServerFlow(client_id=settings.CLIENT_ID,
-                           client_secret=settings.CLIENT_SECRET,
+                           client_secret= settings.CLIENT_SECRET,
                            scope=settings.SCOPE,
-                           redirect_uri=settings.REDIRECT_URI)
-
+                           redirect_uri= settings.REDIRECT_URI)
     credentials = flow.step2_exchange(request.GET['code'])
-
-    storage = Storage('testing.txt')  # prepare file to store user info in it
-    storage.put(credentials)  # storing user info in file
     context = {"info":  credentials}
     return render(request, 'demo/success_gplus.html', context)
