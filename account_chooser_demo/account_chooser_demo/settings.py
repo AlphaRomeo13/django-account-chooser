@@ -284,5 +284,6 @@ CLIENT_ID       ="308413983615.apps.googleusercontent.com"
 CLIENT_SECRET   ="GboICNuFvxGbB679f0hUNbRl"
 SCOPE           ='https://www.googleapis.com/auth/plus.login'
 REDIRECT_URI    ='https://djac-myaser.rhcloud.com/gplus_callback'
+# REDIRECT_URI    ='http://localhost:8000/gplus_callback'
 
 MODE = 'django_registration'

@@ -48,9 +48,9 @@ def twitter_auth(request):
 
 
 def gplus_auth(request):
-    flow = OAuth2WebServerFlow(client_id=setting.CLIENT_ID,
+    flow = OAuth2WebServerFlow(client_id=settings.CLIENT_ID,
                            client_secret= settings.CLIENT_SECRET,
-                           scope='https://www.googleapis.com/auth/plus.login',
+                           scope=settings.SCOPE,
                            redirect_uri= settings.REDIRECT_URI)
     auth_url = flow.step1_get_authorize_url()
     return HttpResponseRedirect(auth_url)
