@@ -56,6 +56,7 @@ def gplus_auth(request):
     return HttpResponseRedirect(auth_url)
 
 
+
 def twitter_callback(request):
     auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET, settings.CALLBACK)
     auth.set_request_token(request.GET['oauth_token'], request.GET['oauth_verifier'])
