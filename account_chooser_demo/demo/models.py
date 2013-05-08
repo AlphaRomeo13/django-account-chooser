@@ -6,7 +6,7 @@ from registration.models import RegistrationProfile
 
 
 class MyCustomProfile(FacebookProfileModel):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField('auth.User')
     
 
 # Make sure we create a MyCustomProfile when creating a User
