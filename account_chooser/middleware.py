@@ -13,6 +13,6 @@ class AccountChooserMiddleware(object):
             if isinstance(response, HttpResponseRedirect):
                 redirect_to = response.get('Location', None)
                 url = reverse('account_chooser_store_account')
-                url + "/?next={next}".format(next=redirect_to)
+                url += "/?next={next}".format(next=redirect_to)
                 return HttpResponseRedirect(url)
         return response
