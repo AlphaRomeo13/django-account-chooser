@@ -2,9 +2,9 @@ language: python
 python:
   - "2.7"
 # command to install dependencies
-install: "pip install -r requirements.pip"
+install: "pip install -r requirements/requirements.pip"
 # command to run tests
-script: coverage run --source="." account_chooser_demo/manage.py test
+script: coverage run --rcfile="./.coveragerc" account_chooser_demo/manage.py test account_chooser
 
 after_success:
     coveralls

@@ -1,11 +1,13 @@
-accountchooser.CONFIG.sitePasswordId = "id_password";
-accountchooser.CONFIG.language = "en";
-accountchooser.CONFIG.signupUrl = "/accounts/register/";
-accountchooser.CONFIG.providers = "['facebook.com', 'twitter.com']";
-accountchooser.CONFIG.homeUrl = "/";
-accountchooser.CONFIG.uiConfig = "";
-accountchooser.CONFIG.siteDisplayNameId = "id_username";
-accountchooser.CONFIG.sitePhotoUrlId = "";
-accountchooser.CONFIG.userStatusUrl = "/accounts/user_status/";
-accountchooser.CONFIG.loginUrl = "/accounts/login/";
-accountchooser.CONFIG.siteEmailId = "id_email";
+accountchooser.CONFIG={ 
+    sitePasswordId: "id_password",
+    language: "en",
+    signupUrl: "/accounts/register/",
+    providers: ['facebook.com', 'twitter.com', 'google.com.com'],
+    homeUrl: "/",
+    uiConfig: "",
+    siteDisplayNameId: "id_username",
+    sitePhotoUrlId: "",
+    userStatusUrl: "/accounts/user_status/",
+    loginUrl: "/accounts/login/",
+    siteEmailId: "id_email",
+}

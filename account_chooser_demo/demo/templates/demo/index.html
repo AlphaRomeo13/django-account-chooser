@@ -3,5 +3,114 @@
 {% block title %}Demo Account Chooser{% endblock %}
 {% block body_class %}{{ block.super }} demo{% endblock %}
 {% block account_chooser %}
-<script type="text/javascript" src="https://www.accountchooser.com/ac.js" > </script>
+<script type="text/javascript" src="https://www.accountchooser.com/ac.js" ></script>
+{% endblock %}
+
+{%block body%}
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/all.js#xfbml=1&appId=151760728335535";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
+<h1>THIS IS INDEX PAGE</h1>
+<h2>LIST OF urls</h2>
+<ul>
+  {% for single_url in url_list %}
+    {% if 'admin' not in single_url %}
+      {% if '<' not in single_url%}
+      <li><a href="{{single_url}}"> {{single_url}} </a></li>
+      {% else %}
+      <li><a href="#"> {{single_url}} </a></li>
+      {% endif %}
+    {% endif %}
+{% endfor %}
+</ul>
+
+
+
+
+    <hr>
+    <hr>
+
+ {# +1 button for the kotob page on google plus  #}
+{# link to +1 must be public content or error will be raised #}
+{# need to change data-herf to gplus content that you want to +1 #}
+<div class="g-plusone" data-annotation="none" data-href="https://plus.google.com/u/0/102469820227970681291/posts/NhwH68DWvWx"></div>
+
+
+
+{# gplus sharing button #}
+<button
+  class="g-interactivepost"
+  data-contenturl="beta.kotob.me"
+  data-contentdeeplinkid="/pages"
+  data-clientid= {{ client_id }}
+  data-cookiepolicy="single_host_origin"
+  data-prefilltext="get books taste"
+  data-calltoactionlabel="FOLLOW"
+  data-calltoactionurl="beta.kotob.me"
+  >
+  share on gplus
+</button>
+
+    <hr>
+    <hr>
+
+{# facebook #}
+
+
+ <div id="fb-root"></div>
+
+    <div class="fb-like" data-href="https://www.facebook.com/kotob.me" data-send="true" data-width="450" data-show-faces="true" data-font="arial"></div>
+    <script src="http://connect.facebook.net/en_US/all.js"></script>
+    <p>
+    <input type="button"
+      onclick="sendRequestViaMultiFriendSelector(); return false;"
+      value="invent your friends on FB"
+    />
+    </p>
+    {# js for dialog "inventing people " #}
+    <script>
+      FB.init({
+        appId  : {{ FB_id }},
+        frictionlessRequests: true
+      });
+      function sendRequestViaMultiFriendSelector() {
+        FB.ui({method: 'apprequests',
+          message: 'My Great Request'
+        }, requestCallback);
+      }
+      
+      function requestCallback(response) {
+        // Handle callback here
+      }
+    </script>
+
+
+
+    <hr>
+    <hr>
+
+
+    <a href="https://twitter.com/share" class="twitter-share-button"  data-lang="en" data-count="none" data-text ="this is leef for social media services">Tweet</a>
+    
+    <a href="https://twitter.com/intent/tweet?screen_name=Kotobdotme" class="twitter-mention-button" data-lang="en" data-text = "What a wonderful day ,hello form leef home">Tweet to @Kotobdotme</a>
+
+    <a href="https://twitter.com/Kotobdotme" class="twitter-follow-button" data-show-count="true" data-lang="en" >Follow @Kotobdotme</a>
+
+  {# script for twitter api buttons #}
+
+    <script>!function(d,s,id){
+      var js,fjs=d.getElementsByTagName(s)[0];
+      if(!d.getElementById(id)){
+        js=d.createElement(s);
+        js.id=id;
+        js.src="https://platform.twitter.com/widgets.js";
+        fjs.parentNode.insertBefore(js,fjs);}
+      }
+      (document,"script","twitter-wjs");
+    </script>
+
 {% endblock %}

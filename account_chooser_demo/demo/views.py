@@ -1,58 +1,77 @@
 # Create your views here.
 from django.views.generic.base import TemplateView
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
-# from django.utils import simplejson as json
 from django.conf import settings
+from django.shortcuts import render
+from django.contrib.admindocs.views import extract_views_from_urlpatterns, \
+    simplify_regex
+
+from oauth2client.client import OAuth2WebServerFlow
 import tweepy
+from oauth2client.file import Storage
 
-
-def index(request):
-    return render(request, "demo/index.html")
-
-
-def facebook_signup(request):
-    return render(request, "demo/facebook_signup.html")
-
-
-def twitter_signup(request):    
-    return render(request, "demo/twitter_signup.html")
-
-
-def twitter_auth(request):
-    consumer_key = settings.CONSTUMER_KEY
-    consumer_secret = settings.CONSTUMER_SECRET
-    auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth_url = auth.get_authorization_url()
-    return HttpResponseRedirect(auth_url)
-
-
-# def finish_auth(request):
-#     consumer_key = "v8wsuWmpbmoKX7IPfEr49A"
-#     consumer_secret = "CcoXqIKiyXXzapOKQ8Rq2QBT8NSPU9GpMzTtaiCZs"
-#     access_token = settings.ACCESS_TOKEN
-#     access_secret = settings.ACCESS_SECRET
-#     auth = tweepy.OAuthHandler(consumer_key, consumer_secret, callback_url)
-#     token = request.session.get('request_token')
-#     session.delete('request_token')
-# 	user = auth.set_request_token(token[0], token[1])
-
-
-# auth.set_access_token(access_token,access_secret)
-# token = request.session.get('request_token')
-# print token
-# session.delete('request_token')
-# first_token = token[0]
-# second_token = token[1]
-# auth.set_request_token(first_token, second_token)
-# try:
-#     auth.get_access_token(verifier)
-# except tweepy.TweepError:
-#     print 'Error! Failed to get access token.'
-
-
-
+# from requests.sessions import session
 
 
 class Index (TemplateView):
     template_name = 'demo/index.html'
+
+    def _get_urls(self):
+        urls = []
+        if settings.ADMIN_FOR:
+            settings_modules = [__import__(m, {}, {}, ['']) for m in settings.ADMIN_FOR]
+        else:
+            settings_modules = [settings]
+
+        for settings_mod in settings_modules:
+            try:
+                urlconf = __import__(settings_mod.ROOT_URLCONF, {}, {}, [''])
+            except Exception as e:
+                continue
+            view_functions = extract_views_from_urlpatterns(urlconf.urlpatterns)
+            for view_function in view_functions:
+                urls.append(simplify_regex(view_function[1]))
+        return urls
+
+    def get_context_data(self, **kwargs):
+        context = super(Index, self).get_context_data(**kwargs)
+        context['url_list'] = self._get_urls()
+        context["client_id"] = settings.CLIENT_ID
+        context["FB_id"] = settings.FACEBOOK_APP_ID
+        return context
+
+
+def twitter_auth(request):
+    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET, settings.CALLBACK)
+    auth_url = auth.get_authorization_url()
+    return HttpResponseRedirect(auth_url)
+
+
+def gplus_auth(request):
+    flow = OAuth2WebServerFlow(client_id=settings.CLIENT_ID,
+                           client_secret= settings.CLIENT_SECRET,
+                           scope=settings.SCOPE,
+                           redirect_uri= settings.REDIRECT_URI)
+    auth_url = flow.step1_get_authorize_url()
+    return HttpResponseRedirect(auth_url)
+
+
+
+def twitter_callback(request):
+    auth = tweepy.OAuthHandler(settings.CONSTUMER_KEY, settings.CONSTUMER_SECRET, settings.CALLBACK)
+    auth.set_request_token(request.GET['oauth_token'], request.GET['oauth_verifier'])
+    auth.get_access_token(request.GET['oauth_verifier'])
+    key = auth.access_token.key
+    secret = auth.access_token.secret
+    context = {'key': key, 'secret': secret}
+    return render(request, 'demo/success_twitter.html', context)
+
+
+def gplus_callback(request):
+    flow = OAuth2WebServerFlow(client_id=settings.CLIENT_ID,
+                           client_secret= settings.CLIENT_SECRET,
+                           scope=settings.SCOPE,
+                           redirect_uri= settings.REDIRECT_URI)
+    credentials = flow.step2_exchange(request.GET['code'])
+    context = {"info":  credentials}
+    return render(request, 'demo/success_gplus.html', context)
