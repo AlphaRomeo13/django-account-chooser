@@ -204,9 +204,10 @@ TEMPLATE_CONTEXT_PROCESSORS = DEFAULT_SETTINGS.TEMPLATE_CONTEXT_PROCESSORS + (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'django_facebook.auth_backends.FacebookBackend',
+    # 'django_facebook.auth_backends.FacebookBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+FACEBOOK_REGISTRATION_BACKEND = 'registration.backends.default.DefaultBackend'
 
 AUTH_PROFILE_MODULE = 'registration.registrationprofile'
 
